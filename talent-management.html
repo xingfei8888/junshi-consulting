@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人才管理体系 - 大连君实管理咨询有限公司</title>
+    <meta name="description" content="专业的人才管理体系咨询服务，帮助企业构建系统化的人才培养体系，包括人才盘点、胜任力模型、领导力发展、内训师培养等项目。借鉴怡安翰威特、美世等国际人力资源咨询公司方法论。">
+    <meta name="keywords" content="人才管理,人才盘点,胜任力模型,领导力发展,内训师培养,人才梯队建设,HR咨询,怡安翰威特,美世">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header { background: linear-gradient(135deg, #1a237e 0%, #283593 100%); color: white; padding: 20px 0; }
+        .logo { font-size: 28px; font-weight: bold; margin-bottom: 10px; }
+        .logo span { color: #4fc3f7; }
+        .slogan { font-size: 16px; opacity: 0.9; margin-bottom: 20px; }
+        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
+        nav a { color: white; text-decoration: none; font-size: 16px; padding: 5px 0; position: relative; }
+        nav a:hover::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: #4fc3f7; }
+        
+        .service-nav { background: #e3f2fd; padding: 15px 0; margin: 20px 0; border-radius: 10px; }
+        .service-nav .container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .service-nav a { color: #1a237e; text-decoration: none; padding: 8px 15px; border-radius: 20px; background: white; font-size: 14px; transition: all 0.3s; }
+        .service-nav a:hover { background: #4fc3f7; color: white; }
+        .service-nav a.active { background: #4fc3f7; color: white; }
+        
+        .section-title { text-align: center; font-size: 32px; margin: 40px 0 30px; color: #1a237e; position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: #4fc3f7; margin: 10px auto; }
+        
+        .content-section { background: white; border-radius: 10px; padding: 40px; margin: 30px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .content-section h2 { color: #1a237e; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e3f2fd; }
+        
+        .methodology-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 40px 0; }
+        .method-card { background: white; border-radius: 10px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 4px solid #ffc107; }
+        .method-icon { font-size: 40px; color: #ffc107; margin-bottom: 20px; }
+        
+        .talent-journey { background: #fff3cd; border-radius: 10px; padding: 40px; margin: 40px 0; }
+        .journey-steps { display: flex; justify-content: space-between; position: relative; margin-top: 40px; }
+        .journey-steps::before { content: ''; position: absolute; top: 25px; left: 50px; right: 50px; height: 2px; background: #ffc107; z-index: 1; }
+        .journey-step { position: relative; z-index: 2; flex: 1; text-align: center; }
+        .step-icon { width: 50px; height: 50px; background: #ffc107; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 15px; }
+        
+        .tool-download { background: #e8f5e9; border-radius: 10px; padding: 30px; margin: 40px 0; }
+        .tool-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: white; border-radius: 8px; margin-bottom: 15px; transition: transform 0.3s; }
+        .tool-item:hover { transform: translateX(5px); }
+        .tool-badge { background: #ffc107; color: #333; padding: 4px 10px; border-radius: 12px; font-size: 12px; }
+        .download-btn { background: #ffc107; color: #333; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; font-weight: bold; }
+        .download-btn:hover { background: #e0a800; }
+        
+        .competency-matrix { background: #e3f2fd; border-radius: 10px; padding: 40px; margin: 40px 0; }
+        .matrix-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .matrix-table th { background: #4fc3f7; color: white; padding: 15px; text-align: left; }
+        .matrix-table td { padding: 15px; border-bottom: 1px solid #ddd; }
+        .level-indicator { display: inline-block; width: 20px; height: 20px; border-radius: 50%; margin-right: 10px; }
+        .level-1 { background: #28a745; }
+        .level-2 { background: #17a2b8; }
+        .level-3 { background: #ffc107; }
+        .level-4 { background: #fd7e14; }
+        .level-5 { background: #dc3545; }
+        
+        .case-studies { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin: 40px 0; }
+        .case-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .case-header { background: #fff3cd; padding: 20px; color: #856404; font-weight: bold; }
+        .case-content { padding: 25px; }
+        .case-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }
+        .case-stat { text-align: center; }
+        .case-value { font-size: 20px; font-weight: bold; color: #1a237e; }
+        .case-label { font-size: 12px; color: #666; }
+        
+        .industry-best { background: #f8f9fa; border-radius: 10px; padding: 40px; margin: 40px 0; border-left: 5px solid #ffc107; }
+        .best-item { margin-bottom: 25px; }
+        .best-title { display: flex; align-items: center; margin-bottom: 10px; }
+        .best-icon { font-size: 24px; margin-right: 15px; color: #ffc107; }
+        
+        .nav-buttons { display: flex; justify-content: space-between; margin: 40px 0; }
+        .nav-btn { padding: 12px 25px; background: #4fc3f7; color: white; text-decoration: none; border-radius: 5px; display: flex; align-items: center; }
+        .nav-btn:hover { background: #03a9f4; }
+        .nav-btn.prev::before { content: '← '; }
+        .nav-btn.next::after { content: ' →'; }
+        
+        footer { background: #0d1b2a; color: #aaa; text-align: center; padding: 40px 20px; font-size: 14px; margin-top: 50px; }
+        footer p { margin: 10px 0; }
+        
+        @media (max-width: 768px) {
+            nav { gap: 15px; }
+            .section-title { font-size: 28px; }
+            .content-section { padding: 20px; }
+            .methodology-grid { grid-template-columns: 1fr; }
+            .journey-steps { flex-direction: column; gap: 30px; }
+            .journey-steps::before { display: none; }
+            .case-studies { grid-template-columns: 1fr; }
+            .case-stats { grid-template-columns: repeat(2, 1fr); }
+            .nav-buttons { flex-direction: column; gap: 15px; }
+            .nav-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">大连<span>君实</span>管理咨询</div>
+            <div class="slogan">专注企业管理咨询与赋能，助力企业卓越发展</div>
+            <nav>
+                <a href="index.html">首页</a>
+                <a href="about.html">关于我们</a>
+                <a href="services.html">核心服务</a>
+                <a href="highlights.html">业务亮点</a>
+                <a href="contact.html">联系我们</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="service-nav">
+        <div class="container">
+            <a href="services.html">核心服务首页</a>
+            <a href="organization-structure.html">组织架构设计</a>
+            <a href="process-optimization.html">业务流程优化</a>
+            <a href="talent-management.html" class="active">人才管理体系</a>
+            <a href="leadership-development.html">领导力发展</a>
+            <a href="sales-training.html">销售技巧培训</a>
+            <a href="ai-strategy.html">AI战略规划</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="section-title">人才管理体系</h1>
+        <p style="text-align: center; color: #666; max-width: 800px; margin: 0 auto 40px;">构建系统化的人才培养体系，从人才盘点、胜任力模型到领导力发展、内训师培养，建立完整的人才生命周期管理体系。借鉴怡安翰威特、美世等国际人力资源咨询公司方法论。</p>
+        
+        <div class="content-section">
+            <h2>🎯 人才管理方法论体系</h2>
+            <p>基于国际先进的人才管理理论，我们形成了独特的人才管理体系方法论：</p>
+            
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <div class="method-icon">📊</div>
+                    <h3>人才盘点与评估</h3>
+                    <p>采用九宫格矩阵、人才潜力评估等工具，系统评估现有人才状况，识别高潜人才。</p>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon">🔧</div>
+                    <h3>胜任力模型构建</h3>
+                    <p>建立岗位能力标准体系，明确各级岗位的胜任力要求和行为标准。</p>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon">🚀</div>
+                    <h3>人才发展体系设计</h3>
+                    <p>设计系统化的人才培养路径，包括培训、轮岗、导师制等多种发展方式。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="talent-journey">
+            <h3 style="color: #856404;">人才发展全周期管理</h3>
+            <div class="journey-steps">
+                <div class="journey-step">
+                    <div class="step-icon">🔍</div>
+                    <h4>人才识别</h4>
+                    <p>发现高潜人才</p>
+                </div>
+                <div class="journey-step">
+                    <div class="step-icon">📈</div>
+                    <h4>能力评估</h4>
+                    <p>评估当前能力</p>
+                </div>
+                <div class="journey-step">
+                    <div class="step-icon">🎯</div>
+                    <h4>发展计划</h4>
+                    <p>制定发展路径</p>
+                </div>
+                <div class="journey-step">
+                    <div class="step-icon">🏆</div>
+                    <h4>培养实施</h4>
+                    <p>实施培养项目</p>
+                </div>
+                <div class="journey-step">
+                    <div class="step-icon">📊</div>
+                    <h4>效果评估</h4>
+                    <p>评估发展效果</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>🎯 服务内容详解</h2>
+            
+            <h3>1. 人才盘点与评估系统</h3>
+            <ul>
+                <li><strong>人才九宫格矩阵</strong>：基于绩效和潜力的二维人才分类</li>
+                <li><strong>人才潜力评估</strong>：评估学习能力、适应能力、发展潜力</li>
+                <li><strong>继任者计划</strong>：关键岗位继任者识别和发展规划</li>
+                <li><strong>人才梯队建设</strong>：建立多层次、多通道的人才梯队</li>
+            </ul>
+            
+            <h3>2. 胜任力模型体系</h3>
+            <ul>
+                <li><strong>核心胜任力模型</strong>：企业通用能力要求</li>
+                <li><strong>领导力胜任力模型</strong>：管理层领导能力标准</li>
+                <li><strong>专业胜任力模型</strong>：各专业岗位能力要求</li>
+                <li><strong>行为标准制定</strong>：将胜任力转化为具体行为标准</li>
+                <li><strong>评估工具开发</strong>：开发胜任力评估问卷和工具</li>
+            </ul>
+            
+            <h3>3. 人才发展项目设计</h3>
+            <ul>
+                <li><strong>领导力发展项目</strong>：高管、中层、基层管理者培养</li>
+                <li><strong>内训师培养体系</strong>：选拔、培养、认证内部培训师</li>
+                <li><strong>专业能力提升课程</strong>：各专业领域技能培训</li>
+                <li><strong>混合式学习设计</strong>：线上+线下结合的培养方式</li>
+                <li><strong>导师制与教练项目</strong>：建立一对一辅导机制</li>
+            </ul>
+        </div>
+        
+        <div class="competency-matrix">
+            <h3>📊 胜任力五级模型示例</h3>
+            <table class="matrix-table">
+                <thead>
+                    <tr>
+                        <th>能力等级</th>
+                        <th>描述</th>
+                        <th>行为表现</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="level-indicator level-1"></span>初级</td>
+                        <td>基本了解，需要指导</td>
+                        <td>能够完成简单任务，需要详细指导</td>
+                    </tr>
+                    <tr>
+                        <td><span class="level-indicator level-2"></span>中级</td>
+                        <td>熟练掌握，独立工作</td>
+                        <td>能够独立完成日常工作，解决常见问题</td>
+                    </tr>
+                    <tr>
+                        <td><span class="level-indicator level-3"></span>高级</td>
+                        <td>深入理解，指导他人</td>
+                        <td>能够指导他人，优化工作流程</td>
+                    </tr>
+                    <tr>
+                        <td><span class="level-indicator level-4"></span>专家级</td>
+                        <td>精通掌握，创新应用</td>
+                        <td>能够创新应用，解决复杂问题</td>
+                    </tr>
+                    <tr>
+                        <td><span class="level-indicator level-5"></span>大师级</td>
+                        <td>行业领先，战略影响</td>
+                        <td>能够制定行业标准，对企业战略有重要影响</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="tool-download">
+            <h2>🛠️ 人才管理工具包</h2>
+            <p>我们提供一系列人才管理工具和模板，帮助企业自主开展人才管理工作：</p>
+            
+            <div class="tool-item">
+                <div>
+                    <h4>人才九宫格评估表</h4>
+                    <p style="color: #666; font-size: 14px;">基于绩效和潜力的人才分类评估工具</p>
+                    <span class="tool-badge">评估工具</span>
+                </div>
+                <a href="javascript:void(0);" class="download-btn" onclick="downloadTool('talent-nine-box')">下载模板</a>
+            </div>
+            
+            <div class="tool-item">
+                <div>
+                    <h4>胜任力模型构建指南</h4>
+                    <p style="color: #666; font-size: 14px;">包含核心胜任力、领导力、专业胜任力模型模板</p>
+                    <span class="tool-badge">建模工具</span>
+                </div>
+                <a href="javascript:void(0);" class="download-btn" onclick="downloadTool('competency-model-guide')">下载模板</a>
+            </div>
+            
+            <div class="tool-item">
+                <div>
+                    <h4>内训师培养手册</h4>
+                    <p style="color: #666; font-size: 14px;">内训师选拔、培养、认证、管理的完整手册</p>
+                    <span class="tool-badge">培养工具</span>
+                </div>
+                <a href="javascript:void(0);" class="download-btn" onclick="downloadTool('trainer-handbook')">下载模板</a>
+            </div>
+            
+            <div class="tool-item">
+                <div>
+                    <h4>人才发展计划模板</h4>
+                    <p style="color: #666; font-size: 14px;">个性化人才发展计划制定模板</p>
+                    <span class="tool-badge">计划工具</span>
+                </div>
+                <a href="javascript:void(0);" class="download-btn" onclick="downloadTool('development-plan')">下载模板</a>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>📊 成功案例展示</h2>
+            
+            <div class="case-studies">
+                <div class="case-card">
+                    <div class="case-header">某科技公司人才梯队建设项目</div>
+                    <div class="case-content">
+                        <h4>项目背景</h4>
+                        <p>公司快速发展，但人才断层严重，关键岗位无合格继任者，中层管理者能力不足。</p>
+                        <h4>解决方案</h4>
+                        <p>实施人才盘点→建立胜任力模型→设计领导力发展项目→建立内训师体系→实施导师制。</p>
+                        <div class="case-stats">
+                            <div class="case-stat">
+                                <div class="case-value">85%</div>
+                                <div class="case-label">关键岗位覆盖</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">+40%</div>
+                                <div class="case-label">内部晋升率</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">-35%</div>
+                                <div class="case-label">关键岗位空缺时间</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">25+</div>
+                                <div class="case-label">认证内训师</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">92%</div>
+                                <div class="case-label">员工满意度</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">+30%</div>
+                                <div class="case-label">管理效率</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <div class="case-header">某制造企业内训师体系建设</div>
+                    <div class="case-content">
+                        <h4>项目背景</h4>
+                        <p>依赖外部培训，成本高且针对性不强，内部经验无法有效传承，新员工成长缓慢。</p>
+                        <h4>解决方案</h4>
+                        <p>选拔潜力内训师→系统培养训练→课程开发指导→认证激励体系→建立知识管理平台。</p>
+                        <div class="case-stats">
+                            <div class="case-stat">
+                                <div class="case-value">-60%</div>
+                                <div class="case-label">外部培训费用</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">50+</div>
+                                <div class="case-label">内部课程开发</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">35人</div>
+                                <div class="case-label">认证内训师</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">-45%</div>
+                                <div class="case-label">新员工上手时间</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">+55%</div>
+                                <div class="case-label">经验传承效率</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">4.8/5.0</div>
+                                <div class="case-label">培训满意度</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="industry-best">
+            <h2>🏆 行业最佳实践借鉴</h2>
+            
+            <div class="best-item">
+                <div class="best-title">
+                    <div class="best-icon">🏢</div>
+                    <h3>怡安翰威特人才管理方法论</h3>
+                </div>
+                <ul>
+                    <li><strong>人才生命周期管理</strong>：从入职到离职的全周期人才管理</li>
+                    <li><strong>数据驱动决策</strong>：基于数据分析的人才管理决策</li>
+                    <li><strong>个性化发展路径</strong>：根据个人特点设计发展路径</li>
+                    <li><strong>人才管理技术平台</strong>：运用技术提升人才管理效率</li>
+                </ul>
+            </div>
+            
+            <div class="best-item">
+                <div class="best-title">
+                    <div class="best-icon">📈</div>
+                    <h3>美世人力资源管理最佳实践</h3>
+                </div>
+                <ul>
+                    <li><strong>战略人才管理</strong>：人才管理与业务战略紧密结合</li>
+                    <li><strong>胜任力导向发展</strong>：基于胜任力的人才培养体系</li>
+                    <li><strong>多元发展渠道</strong>：提供多种职业发展通道</li>
+                    <li><strong>持续反馈机制</strong>：建立持续的人才反馈和改进机制</li>
+                </ul>
+            </div>
+            
+            <div class="best-item">
+                <div class="best-title">
+                    <div class="best-icon">🎯</div>
+                    <h3>华为人才管理实践</h3>
+                </div>
+                <ul>
+                    <li><strong>奋斗者文化</strong>：强调奋斗和贡献的人才导向</li>
+                    <li><strong>轮岗培养机制</strong>：通过轮岗培养复合型人才</li>
+                    <li><strong>导师制传承</strong>：建立老带新的经验传承机制</li>
+                    <li><strong>人才流动机制</strong>：建立内部人才市场促进流动</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>📈 服务流程与报价</h2>
+            
+            <h3>标准服务流程</h3>
+            <ol style="padding-left: 20px; margin-bottom: 30px;">
+                <li><strong>现状诊断（1-2周）</strong>：人才现状调研、问题诊断、需求分析</li>
+                <li><strong>体系设计（2-4周）</strong>：人才管理体系设计、工具开发、方案制定</li>
+                <li><strong>试点实施（3-4周）</strong>：选择试点部门、工具试用、人员培训</li>
+                <li><strong>全面推广（4-8周）</strong>：企业范围推广、系统培训、制度建立</li>
+                <li><strong>持续优化（持续）</strong>：效果评估、持续改进、年度回顾</li>
+            </ol>
+            
+            <h3>服务报价</h3>
+            <p>人才管理体系建设项目根据企业规模、体系复杂度和实施范围确定报价：</p>
+            <ul>
+                <li><strong>单项人才盘点项目</strong>：8-20万元</li>
+                <li><strong>胜任力模型构建项目</strong>：10-25万元</li>
+                <li><strong>完整人才管理体系</strong>：30-80万元</li>
+                <li><strong>年度人才管理顾问</strong>：15-35万元/年</li>
+            </ul>
+            <p style="margin-top: 20px;">具体报价请<a href="contact.html">联系我们</a>获取定制化方案。</p>
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="process-optimization.html" class="nav-btn prev">上一服务：业务流程优化</a>
+            <a href="leadership-development.html" class="nav-btn next">下一服务：领导力发展</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2014-2026 大连君实管理咨询有限公司 版权所有</p>
+            <p>专业创造价值，诚信铸就未来</p>
+        </div>
+    </footer>
+    
+    <script>
+        // 工具下载功能
+        function downloadTool(toolId) {
+            const toolData = {
+                'talent-nine-box': {
+                    name: '人才九宫格评估表.xlsx',
+                    content: '这是基于绩效和潜力的人才分类评估工具...'
+                },
+                'competency-model-guide': {
+                    name: '胜任力模型构建指南.docx',
+                    content: '这是胜任力模型构建的完整指南和模板...'
+                },
+                'trainer-handbook': {
+                    name: '内训师培养手册.pdf',
+                    content: '这是内训师选拔、培养、认证的完整手册...'
+                },
+                'development-plan': {
+                    name: '人才发展计划模板.docx',
+                    content: '这是个性化人才发展计划制定模板...'
+                }
+            };
+            
+            if (toolData[toolId]) {
+                const tool = toolData[toolId];
+                // 模拟下载过程
+                alert(`正在下载：${tool.name}\n\n在实际项目中，我们将提供完整的定制化工具文件。\n\n如需真实文件，请通过咨询联系我们。`);
+                
+                // 记录下载行为
+                console.log(`用户下载了人才管理工具：${toolId} - ${tool.name}`);
+                
+                // 在实际项目中，这里应该生成真实文件并提供下载
+                // const blob = new Blob([tool.content], { type: 'application/octet-stream' });
+                // const url = window.URL.createObjectURL(blob);
+                // const a = document.createElement('a');
+                // a.href = url;
+                // a.download = tool.name;
+                // a.click();
+            } else {
+                alert('工具正在准备中，请联系我们获取完整工具包。');
+            }
+        }
+        
+        // 人才旅程步骤动画
+        document.querySelectorAll('.step-icon').forEach((icon, index) => {
+            icon.style.animationDelay = (index * 0.2) + 's';
+        });
+    </script>
+</body>
+</html>
