@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任务管理 - 君实CRM</title>
+    <style>
+        body { font-family: 'Microsoft YaHei', sans-serif; margin: 0; padding: 0; background: #f8f9fa; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .crm-header { 
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%); 
+            color: white; padding: 15px 20px; 
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .logo { font-size: 24px; font-weight: bold; }
+        .logo span { color: #4fc3f7; }
+        .nav { display: flex; gap: 20px; }
+        .nav a { color: white; text-decoration: none; padding: 5px 0; position: relative; }
+        .nav a:hover::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: #4fc3f7; }
+        .btn { 
+            background: #4fc3f7; color: white; padding: 8px 16px; 
+            border: none; border-radius: 4px; cursor: pointer;
+            font-size: 14px; transition: background 0.3s;
+        }
+        .btn:hover { background: #03a9f4; }
+        .btn-success { background: #27ae60; }
+        .btn-success:hover { background: #219653; }
+        .task-card { 
+            background: white; border-radius: 8px; padding: 15px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 15px;
+            border-left: 4px solid #4fc3f7;
+        }
+        .task-card.urgent { border-left-color: #e74c3c; }
+        .task-card.high { border-left-color: #e67e22; }
+        .task-card.medium { border-left-color: #f39c12; }
+        .task-card.low { border-left-color: #27ae60; }
+        .task-card.completed { border-left-color: #95a5a6; opacity: 0.7; }
+        .task-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .task-title { font-weight: 500; font-size: 16px; color: #2c3e50; }
+        .task-priority { font-size: 12px; padding: 2px 8px; border-radius: 12px; color: white; }
+        .priority-urgent { background: #e74c3c; }
+        .priority-high { background: #e67e22; }
+        .priority-medium { background: #f39c12; }
+        .priority-low { background: #27ae60; }
+        .task-meta { display: flex; gap: 15px; margin-top: 10px; font-size: 12px; color: #666; }
+        .calendar-day { 
+            background: white; border-radius: 8px; padding: 10px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 10px;
+        }
+        .calendar-day.today { background: #e3f2fd; }
+    </style>
+</head>
+<body>
+    <header class="crm-header">
+        <div class="logo">君实<span>CRM</span></div>
+        <nav class="nav">
+            <a href="crm.html">仪表板</a>
+            <a href="customers.html">客户管理</a>
+            <a href="opportunities.html">销售管道</a>
+            <a href="tasks.html" style="color: #4fc3f7;">任务管理</a>
+            <a href="reports.html">报表分析</a>
+            <a href="index.html">返回官网</a>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h1 style="color: #2c3e50; margin-bottom: 20px; font-size: 28px;">任务管理</h1>
+        
+        <div style="background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3 style="margin: 0; color: #2c3e50;">任务总览</h3>
+                    <p style="color: #666; margin-top: 5px;">管理所有待办事项和跟进任务</p>
+                </div>
+                <button class="btn btn-success" onclick="showAddTaskModal()">
+                    <span style="font-size: 18px;">+</span>
+                    新增任务
+                </button>
+            </div>
+            
+            <div style="display: flex; gap: 20px; margin-top: 20px;">
+                <div>
+                    <span style="color: #666; font-size: 14px;">总任务数：</span>
+                    <span style="font-size: 24px; font-weight: bold; color: #2c3e50;" id="totalTasks">0</span>
+                </div>
+                <div>
+                    <span style="color: #666; font-size: 14px;">待完成：</span>
+                    <span style="font-size: 24px; font-weight: bold; color: #e74c3c;" id="pendingTasks">0</span>
+                </div>
+                <div>
+                    <span style="color: #666; font-size: 14px;">今日到期：</span>
+                    <span style="font-size: 24px; font-weight: bold; color: #f39c12;" id="dueToday">0</span>
+                </div>
+                <div>
+                    <span style="color: #666; font-size: 14px;">已完成：</span>
+                    <span style="font-size: 24px; font-weight: bold; color: #27ae60;" id="completedTasks">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 任务分类视图 -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">今日任务</h3>
+                <div id="todayTasks">
+                    <!-- 动态加载今日任务 -->
+                </div>
+            </div>
+            
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">本周任务</h3>
+                <div id="weekTasks">
+                    <!-- 动态加载本周任务 -->
+                </div>
+            </div>
+            
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">按优先级</h3>
+                <div id="priorityTasks">
+                    <!-- 动态加载按优先级任务 -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- 日历视图 -->
+        <div style="margin-top: 30px;">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">任务日历</h3>
+            <div id="taskCalendar">
+                <!-- 动态加载日历 -->
+            </div>
+        </div>
+        
+        <!-- 已完成任务 -->
+        <div style="margin-top: 30px;">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">最近完成的任务</h3>
+            <div id="completedTasksList">
+                <!-- 动态加载已完成任务 -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 任务数据管理
+        class TaskManager {
+            constructor() {
+                this.storageKey = 'junshi_crm_tasks';
+                this.initializeSampleData();
+            }
+            
+            initializeSampleData() {
+                const existingData = localStorage.getItem(this.storageKey);
+                if (!existingData) {
+                    const today = new Date();
+                    const tomorrow = new Date(today);
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    const nextWeek = new Date(today);
+                    nextWeek.setDate(nextWeek.getDate() + 7);
+                    
+                    const sampleTasks = [
+                        {
+                            id: 1,
+                            title: '跟进大连某国企项目需求',
+                            description: '电话沟通组织架构优化详细需求',
+                            priority: 'high',
+                            status: 'pending',
+                            dueDate: today.toISOString().split('T')[0],
+                            assignee: '张经理',
+                            customerId: 1,
+                            customerName: '大连某国企',
+                            createdAt: '2026-02-18T10:30:00Z',
+                            completedAt: null
+                        },
+                        {
+                            id: 2,
+                            title: '准备制造企业流程优化方案',
+                            description: '制定详细的流程改进建议书',
+                            priority: 'medium',
+                            status: 'pending',
+                            dueDate: tomorrow.toISOString().split('T')[0],
+                            assignee: '李顾问',
+                            customerId: 2,
+                            customerName: '某制造企业',
+                            createdAt: '2026-02-19T14:20:00Z',
+                            completedAt: null
+                        },
+                        {
+                            id: 3,
+                            title: '科技公司数字化转型方案演示',
+                            description: '准备PPT并进行方案演示',
+                            priority: 'urgent',
+                            status: 'pending',
+                            dueDate: nextWeek.toISOString().split('T')[0],
+                            assignee: '王总监',
+                            customerId: 3,
+                            customerName: '科技公司A',
+                            createdAt: '2026-02-20T09:15:00Z',
+                            completedAt: null
+                        },
+                        {
+                            id: 4,
+                            title: '客户满意度回访',
+                            description: '电话回访上月签约客户',
+                            priority: 'low',
+                            status: 'completed',
+                            dueDate: '2026-02-15',
+                            assignee: '客服部',
+                            customerId: null,
+                            customerName: '多个客户',
+                            createdAt: '2026-02-10T11:30:00Z',
+                            completedAt: '2026-02-15T16:45:00Z'
+                        }
+                    ];
+                    localStorage.setItem(this.storageKey, JSON.stringify(sampleTasks));
+                }
+            }
+            
+            getTasks() {
+                const data = localStorage.getItem(this.storageKey);
+                return data ? JSON.parse(data) : [];
+            }
+            
+            saveTasks(tasks) {
+                localStorage.setItem(this.storageKey, JSON.stringify(tasks));
+            }
+            
+            addTask(task) {
+                const tasks = this.getTasks();
+                task.id = Date.now();
+                task.status = 'pending';
+                task.createdAt = new Date().toISOString();
+                task.completedAt = null;
+                tasks.push(task);
+                this.saveTasks(tasks);
+                return task;
+            }
+            
+            updateTaskStatus(id, status) {
+                const tasks = this.getTasks();
+                const index = tasks.findIndex(t => t.id === id);
+                if (index !== -1) {
+                    tasks[index].status = status;
+                    if (status === 'completed') {
+                        tasks[index].completedAt = new Date().toISOString();
+                    }
+                    this.saveTasks(tasks);
+                    return true;
+                }
+                return false;
+            }
+            
+            deleteTask(id) {
+                const tasks = this.getTasks();
+                const filtered = tasks.filter(t => t.id !== id);
+                this.saveTasks(filtered);
+                return filtered.length !== tasks.length;
+            }
+            
+            getPriorityColor(priority) {
+                switch(priority) {
+                    case 'urgent': return '#e74c3c';
+                    case 'high': return '#e67e22';
+                    case 'medium': return '#f39c12';
+                    case 'low': return '#27ae60';
+                    default: return '#95a5a6';
+                }
+            }
+            
+            getPriorityText(priority) {
+                switch(priority) {
+                    case 'urgent': return '紧急';
+                    case 'high': return '高';
+                    case 'medium': return '中';
+                    case 'low': return '低';
+                    default: return '普通';
+                }
+            }
+        }
+        
+        const taskManager = new TaskManager();
+        
+        // 渲染任务管理
+        function renderTaskManagement() {
+            const tasks = taskManager.getTasks();
+            const today = new Date().toISOString().split('T')[0];
+            
+            // 更新统计数据
+            updateStats(tasks, today);
+            
+            // 渲染今日任务
+            renderTodayTasks(tasks, today);
+            
+            // 渲染本周任务
+            renderWeekTasks(tasks);
+            
+            // 渲染按优先级任务
+            renderPriorityTasks(tasks);
+            
+            // 渲染任务日历
+            renderTaskCalendar(tasks);
+            
+            // 渲染已完成任务
+            renderCompletedTasks(tasks);
+        }
+        
+        function updateStats(tasks, today) {
+            const total = tasks.length;
+            const pending = tasks.filter(t => t.status === 'pending').length;
+            const dueToday = tasks.filter(t => t.dueDate === today && t.status === 'pending').length;
+            const completed = tasks.filter(t => t.status === 'completed').length;
+            
+            document.getElementById('totalTasks').textContent = total;
+            document.getElementById('pendingTasks').textContent = pending;
+            document.getElementById('dueToday').textContent = dueToday;
+            document.getElementById('completedTasks').textContent = completed;
+        }
+        
+        function renderTodayTasks(tasks, today) {
+            const todayTasks = tasks.filter(t => t.dueDate === today);
+            const container = document.getElementById('todayTasks');
+            
+            if (todayTasks.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">今日无任务安排</div>';
+                return;
+            }
+            
+            container.innerHTML = todayTasks.map(task => {
+                const priorityColor = taskManager.getPriorityColor(task.priority);
+                const priorityText = taskManager.getPriorityText(task.priority);
+                const statusClass = task.status === 'completed' ? 'completed' : task.priority;
+                
+                return `
+                    <div class="task-card ${statusClass}">
+                        <div class="task-header">
+                            <div class="task-title">${task.title}</div>
+                            <span class="task-priority priority-${task.priority}">${priorityText}</span>
+                        </div>
+                        <div style="color: #666; font-size: 14px;">${task.description}</div>
+                        <div class="task-meta">
+                            <span>负责人：${task.assignee || '未分配'}</span>
+                            <span>客户：${task.customerName || '--'}</span>
+                            <span>状态：${task.status === 'completed' ? '已完成' : '进行中'}</span>
+                        </div>
+                        <div style="display: flex; gap: 5px; margin-top: 10px;">
+                            ${task.status !== 'completed' ? 
+                                `<button class="btn" onclick="completeTask(${task.id})" style="padding: 4px 8px; font-size: 12px; background: #27ae60;">完成</button>` 
+                                : ''
+                            }
+                            <button class="btn" onclick="viewTask(${task.id})" style="padding: 4px 8px; font-size: 12px; background: #ecf0f1; color: #2c3e50;">详情</button>
+                            <button class="btn" onclick="deleteTask(${task.id})" style="padding: 4px 8px; font-size: 12px; background: #e74c3c;">删除</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function renderWeekTasks(tasks) {
+            const today = new Date();
+            const weekEnd = new Date(today);
+            weekEnd.setDate(weekEnd.getDate() + 7);
+            
+            const weekTasks = tasks.filter(t => {
+                const dueDate = new Date(t.dueDate);
+                return dueDate >= today && dueDate <= weekEnd && t.status !== 'completed';
+            });
+            
+            const container = document.getElementById('weekTasks');
+            
+            if (weekTasks.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">本周无待办任务</div>';
+                return;
+            }
+            
+            container.innerHTML = weekTasks.map(task => {
+                const dueDate = new Date(task.dueDate);
+                const daysDiff = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+                const daysText = daysDiff === 0 ? '今天' : `${daysDiff}天后`;
+                
+                return `
+                    <div class="task-card ${task.priority}">
+                        <div class="task-header">
+                            <div class="task-title">${task.title}</div>
+                            <span style="color: #666; font-size: 12px;">${daysText}</span>
+                        </div>
+                        <div style="color: #666; font-size: 14px;">${task.description}</div>
+                        <div class="task-meta">
+                            <span>截止：${task.dueDate}</span>
+                            <span>负责人：${task.assignee}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function renderPriorityTasks(tasks) {
+            const pendingTasks = tasks.filter(t => t.status !== 'completed');
+            const priorityOrder = ['urgent', 'high', 'medium', 'low'];
+            const container = document.getElementById('priorityTasks');
+            
+            if (pendingTasks.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">无待办任务</div>';
+                return;
+            }
+            
+            container.innerHTML = priorityOrder.map(priority => {
+                const priorityTasks = pendingTasks.filter(t => t.priority === priority);
+                if (priorityTasks.length === 0) return '';
+                
+                const priorityText = taskManager.getPriorityText(priority);
+                const priorityColor = taskManager.getPriorityColor(priority);
+                
+                return `
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <div style="width: 12px; height: 12px; background: ${priorityColor}; border-radius: 50%; margin-right: 8px;"></div>
+                            <span style="font-weight: 500; color: #2c3e50;">${priorityText}优先级 (${priorityTasks.length})</span>
+                        </div>
+                        ${priorityTasks.map(task => `
+                            <div style="background: #f8f9fa; border-radius: 6px; padding: 8px; margin-bottom: 5px; font-size: 14px;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>${task.title}</span>
+                                    <span style="color: #666;">${task.dueDate}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function renderTaskCalendar(tasks) {
+            const today = new Date();
+            const calendarContainer = document.getElementById('taskCalendar');
+            const pendingTasks = tasks.filter(t => t.status !== 'completed');
+            
+            // 创建接下来7天的日历
+            let calendarHTML = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">';
+            
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(today);
+                date.setDate(date.getDate() + i);
+                const dateStr = date.toISOString().split('T')[0];
+                const isToday = i === 0;
+                
+                const dayTasks = pendingTasks.filter(t => t.dueDate === dateStr);
+                const dayName = date.toLocaleDateString('zh-CN', { weekday: 'short' });
+                const dayNum = date.getDate();
+                
+                calendarHTML += `
+                    <div class="calendar-day ${isToday ? 'today' : ''}">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div>
+                                <div style="font-weight: 500; font-size: 16px;">${dayName}</div>
+                                <div style="font-size: 24px; font-weight: bold; color: #2c3e50;">${dayNum}</div>
+                            </div>
+                            <span style="background: ${dayTasks.length > 0 ? '#e74c3c' : '#27ae60'}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px;">
+                                ${dayTasks.length}个任务
+                            </span>
+                        </div>
+                        ${dayTasks.length > 0 ? 
+                            dayTasks.map(task => `
+                                <div style="font-size: 12px; color: #666; margin-bottom: 5px; padding: 4px; background: #f8f9fa; border-radius: 4px;">
+                                    ${task.title}
+                                </div>
+                            `).join('') : 
+                            '<div style="text-align: center; color: #999; font-size: 12px; padding: 10px;">无任务</div>'
+                        }
+                    </div>
+                `;
+            }
+            
+            calendarHTML += '</div>';
+            calendarContainer.innerHTML = calendarHTML;
+        }
+        
+        function renderCompletedTasks(tasks) {
+            const completedTasks = tasks
+                .filter(t => t.status === 'completed')
+                .sort((a, b) => new Date(b.completedAt) - new Date(a.completedAt))
+                .slice(0, 5);
+            
+            const container = document.getElementById('completedTasksList');
+            
+            if (completedTasks.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">暂无已完成任务</div>';
+                return;
+            }
+            
+            container.innerHTML = completedTasks.map(task => {
+                const completedDate = new Date(task.completedAt);
+                const formattedDate = `${completedDate.getMonth()+1}月${completedDate.getDate()}日 ${completedDate.getHours().toString().padStart(2, '0')}:${completedDate.getMinutes().toString().padStart(2, '0')}`;
+                
+                return `
+                    <div class="task-card completed">
+                        <div class="task-header">
+                            <div class="task-title">${task.title}</div>
+                            <span style="color: #27ae60; font-size: 12px;">已完成</span>
+                        </div>
+                        <div style="color: #666; font-size: 14px;">${task.description}</div>
+                        <div class="task-meta">
+                            <span>负责人：${task.assignee}</span>
+                            <span>完成时间：${formattedDate}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function showAddTaskModal() {
+            const title = prompt('请输入任务标题：');
+            if (!title) return;
+            
+            const task = {
+                title: title,
+                description: prompt('请输入任务描述：') || '',
+                priority: prompt('优先级（urgent/high/medium/low）：', 'medium') || 'medium',
+                dueDate: prompt('截止日期（YYYY-MM-DD）：', new Date().toISOString().split('T')[0]),
+                assignee: prompt('负责人：') || '未分配',
+                customerName: prompt('关联客户（可选）：') || ''
+            };
+            
+            if (!task.dueDate) return;
+            
+            taskManager.addTask(task);
+            renderTaskManagement();
+            alert('任务添加成功！');
+        }
+        
+        function viewTask(id) {
+            const tasks = taskManager.getTasks();
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                const priorityText = taskManager.getPriorityText(task.priority);
+                const statusText = task.status === 'completed' ? '已完成' : '进行中';
+                
+                alert(`📋 任务详情
+
+🏷️ 任务标题：${task.title}
+📝 任务描述：${task.description || '无'}
+🎯 优先级：${priorityText}
+📅 截止日期：${task.dueDate}
+👤 负责人：${task.assignee || '未分配'}
+🏢 关联客户：${task.customerName || '--'}
+📊 状态：${statusText}
+${task.completedAt ? `✅ 完成时间：${new Date(task.completedAt).toLocaleString('zh-CN')}` : ''}`);
+            }
+        }
+        
+        function completeTask(id) {
+            if (taskManager.updateTaskStatus(id, 'completed')) {
+                renderTaskManagement();
+                alert('任务标记为已完成！');
+            }
+        }
+        
+        function deleteTask(id) {
+            if (confirm('确定要删除这个任务吗？此操作不可恢复。')) {
+                if (taskManager.deleteTask(id)) {
+                    renderTaskManagement();
+                    alert('任务删除成功！');
+                }
+            }
+        }
+        
+        // 页面加载
+        document.addEventListener('DOMContentLoaded', renderTaskManagement);
+    </script>
+</body>
+</html>
