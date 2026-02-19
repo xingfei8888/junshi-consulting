@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>核心服务 - 大连君实管理咨询有限公司</title>
+    <meta name="description" content="大连君实管理咨询有限公司提供组织架构设计、业务流程再造、人才发展体系建设、管理赋能培训等专业服务。">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header { background: linear-gradient(135deg, #1a237e 0%, #283593 100%); color: white; padding: 20px 0; }
+        .logo { font-size: 28px; font-weight: bold; margin-bottom: 10px; }
+        .logo span { color: #4fc3f7; }
+        .slogan { font-size: 16px; opacity: 0.9; margin-bottom: 20px; }
+        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
+        nav a { color: white; text-decoration: none; font-size: 16px; padding: 5px 0; position: relative; }
+        nav a:hover::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: #4fc3f7; }
+        
+        .section-title { text-align: center; font-size: 32px; margin: 50px 0 30px; color: #1a237e; position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: #4fc3f7; margin: 10px auto; }
+        
+        .service-detail { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin: 30px 0; }
+        .service-detail h2 { color: #1a237e; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e3f2fd; }
+        
+        .process { max-width: 800px; margin: 40px auto; }
+        .process-step { display: flex; align-items: center; margin-bottom: 30px; }
+        .step-number { width: 50px; height: 50px; background: #4fc3f7; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; margin-right: 20px; flex-shrink: 0; }
+        
+        .case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 40px 0; }
+        .case-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .case-header { background: #e3f2fd; padding: 20px; color: #1a237e; font-weight: bold; }
+        .case-content { padding: 20px; }
+        
+        .back-home { display: inline-block; margin: 30px 0; padding: 10px 20px; background: #4fc3f7; color: white; text-decoration: none; border-radius: 5px; }
+        .back-home:hover { background: #03a9f4; }
+        
+        footer { background: #0d1b2a; color: #aaa; text-align: center; padding: 40px 20px; font-size: 14px; margin-top: 50px; }
+        footer p { margin: 10px 0; }
+        
+        @media (max-width: 768px) {
+            nav { gap: 15px; }
+            .section-title { font-size: 28px; }
+            .service-detail { padding: 20px; }
+            .process-step { flex-direction: column; align-items: flex-start; }
+            .step-number { margin-bottom: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">大连<span>君实</span>管理咨询</div>
+            <div class="slogan">专注企业管理咨询与赋能，助力企业卓越发展</div>
+            <nav>
+                <a href="index.html">首页</a>
+                <a href="about.html">关于我们</a>
+                <a href="services.html" style="color: #4fc3f7;">核心服务</a>
+                <a href="highlights.html">业务亮点</a>
+                <a href="contact.html">联系我们</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="section-title">核心服务领域</h1>
+        
+        <div class="service-detail">
+            <h2>🏢 组织架构设计</h2>
+            <p>为企业设计科学合理的组织架构，明确权责关系，提升组织运行效率，支持战略目标实现。</p>
+            <h3>服务内容：</h3>
+            <ul>
+                <li>组织诊断与评估</li>
+                <li>组织架构优化设计</li>
+                <li>岗位职责体系构建</li>
+                <li>权责利匹配机制设计</li>
+                <li>组织效能评估与改进</li>
+            </ul>
+        </div>
+        
+        <div class="service-detail">
+            <h2>🔄 业务流程再造</h2>
+            <p>通过流程优化与再造，消除冗余环节，提升运营效率，降低成本，增强企业核心竞争力。</p>
+            <h3>服务内容：</h3>
+            <ul>
+                <li>业务流程诊断与分析</li>
+                <li>核心流程优化设计</li>
+                <li>跨部门流程协同优化</li>
+                <li>流程数字化改造</li>
+                <li>流程绩效监控体系</li>
+            </ul>
+        </div>
+        
+        <div class="service-detail">
+            <h2>🎯 人才发展体系建设</h2>
+            <p>构建系统化的人才培养体系，包括领导力发展、专业能力提升、内训师培养等项目。</p>
+            <h3>服务内容：</h3>
+            <ul>
+                <li>人才盘点与评估</li>
+                <li>胜任力模型构建</li>
+                <li>领导力发展项目</li>
+                <li>专业能力提升课程</li>
+                <li>内训师培养体系</li>
+                <li>人才梯队建设</li>
+            </ul>
+        </div>
+        
+        <div class="service-detail">
+            <h2>🤝 管理赋能培训</h2>
+            <p>提供中层管理、团队建设、战略执行等培训课程，提升管理者综合素质与领导能力。</p>
+            <h3>培训课程：</h3>
+            <ul>
+                <li>中层管理者能力提升</li>
+                <li>团队建设与高效协作</li>
+                <li>战略解码与执行</li>
+                <li>绩效管理与激励</li>
+                <li>变革管理与创新</li>
+            </ul>
+        </div>
+        
+        <div class="service-detail">
+            <h2>💰 销售赋能培训</h2>
+            <p>定制化销售技巧、客户关系管理、商机挖掘等培训，提升销售团队业绩达成能力。</p>
+            <h3>培训课程：</h3>
+            <ul>
+                <li>销售技巧与策略</li>
+                <li>大客户关系管理</li>
+                <li>商机挖掘与转化</li>
+                <li>谈判技巧与策略</li>
+                <li>销售团队管理</li>
+            </ul>
+        </div>
+        
+        <div class="service-detail">
+            <h2>🤖 AI与数字化转型</h2>
+            <p>提供人工智能应用、数字化转型方案设计，帮助企业把握科技发展趋势，实现智能化升级。</p>
+            <h3>服务内容：</h3>
+            <ul>
+                <li>数字化转型战略规划</li>
+                <li>AI技术应用场景设计</li>
+                <li>业务流程数字化改造</li>
+                <li>数据驱动决策体系</li>
+                <li>智能化运营方案</li>
+            </ul>
+        </div>
+        
+        <h2 class="section-title">标准服务流程</h2>
+        <div class="process">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div>
+                    <h3>需求诊断</h3>
+                    <p>深入调研企业现状，识别核心问题与改进机会</p>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div>
+                    <h3>方案设计</h3>
+                    <p>定制化设计咨询/培训方案，明确目标与实施路径</p>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div>
+                    <h3>实施交付</h3>
+                    <p>专业团队实施，确保方案落地与效果达成</p>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <div>
+                    <h3>效果评估</h3>
+                    <p>跟踪评估实施效果，持续优化改进</p>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">服务报价</h2>
+        <div class="service-detail">
+            <p>我们的服务采用<strong>定制化报价</strong>模式，根据企业规模、服务内容、实施周期等因素综合确定。</p>
+            <p>典型项目报价范围：</p>
+            <ul>
+                <li>单项咨询项目：5-30万元</li>
+                <li>系统化咨询项目：30-100万元</li>
+                <li>单项培训课程：2-10万元/天</li>
+                <li>年度培训计划：20-80万元</li>
+            </ul>
+            <p>具体报价请<a href="contact.html">联系我们</a>获取定制化方案。</p>
+        </div>
+        
+        <a href="index.html" class="back-home">← 返回首页</a>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2014-2026 大连君实管理咨询有限公司 版权所有</p>
+            <p>专业创造价值，诚信铸就未来</p>
+        </div>
+    </footer>
+</body>
+</html>
