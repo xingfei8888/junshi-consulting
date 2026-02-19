@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>领导力发展 - 大连君实管理咨询有限公司</title>
+    <meta name="description" content="专业的领导力发展咨询服务，为企业定制多层次领导力培养项目，包括高管领导力、中层管理能力、基层主管技能等。借鉴麦肯锡、光辉国际等国际咨询公司领导力发展方法论。">
+    <meta name="keywords" content="领导力发展,领导力培训,高管领导力,中层管理,团队领导,麦肯锡领导力,光辉国际,管理能力提升">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header { background: linear-gradient(135deg, #1a237e 0%, #283593 100%); color: white; padding: 20px 0; }
+        .logo { font-size: 28px; font-weight: bold; margin-bottom: 10px; }
+        .logo span { color: #4fc3f7; }
+        .slogan { font-size: 16px; opacity: 0.9; margin-bottom: 20px; }
+        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
+        nav a { color: white; text-decoration: none; font-size: 16px; padding: 5px 0; position: relative; }
+        nav a:hover::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: #4fc3f7; }
+        
+        .service-nav { background: #e3f2fd; padding: 15px 0; margin: 20px 0; border-radius: 10px; }
+        .service-nav .container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .service-nav a { color: #1a237e; text-decoration: none; padding: 8px 15px; border-radius: 20px; background: white; font-size: 14px; transition: all 0.3s; }
+        .service-nav a:hover { background: #4fc3f7; color: white; }
+        .service-nav a.active { background: #4fc3f7; color: white; }
+        
+        .section-title { text-align: center; font-size: 32px; margin: 40px 0 30px; color: #1a237e; position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: #4fc3f7; margin: 10px auto; }
+        
+        .content-section { background: white; border-radius: 10px; padding: 40px; margin: 30px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .content-section h2 { color: #1a237e; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e3f2fd; }
+        
+        .leadership-levels { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin: 40px 0; }
+        .level-card { background: white; border-radius: 10px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-top: 4px solid #007bff; }
+        .level-title { display: flex; align-items: center; margin-bottom: 20px; }
+        .level-icon { font-size: 32px; margin-right: 15px; color: #007bff; }
+        .level-details { margin-top: 20px; }
+        .level-feature { display: flex; align-items: center; margin-bottom: 10px; }
+        .feature-icon { color: #28a745; margin-right: 10px; }
+        
+        .leadership-journey { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px; padding: 40px; margin: 40px 0; }
+        .journey-steps { display: flex; justify-content: space-between; position: relative; margin-top: 40px; }
+        .journey-steps::before { content: ''; position: absolute; top: 25px; left: 50px; right: 50px; height: 2px; background: rgba(255,255,255,0.5); z-index: 1; }
+        .journey-step { position: relative; z-index: 2; flex: 1; text-align: center; }
+        .step-number { width: 50px; height: 50px; background: white; color: #007bff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; margin: 0 auto 15px; }
+        
+        .toolbox { background: #e8f5e9; border-radius: 10px; padding: 40px; margin: 40px 0; }
+        .tool-category { margin-bottom: 30px; }
+        .tool-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 15px; }
+        .tool-item { background: white; border-radius: 8px; padding: 20px; display: flex; justify-content: space-between; align-items: center; transition: transform 0.3s; }
+        .tool-item:hover { transform: translateX(5px); }
+        .tool-badge { background: #28a745; color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; }
+        .download-btn { background: #007bff; color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; }
+        
+        .methodology-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 40px 0; }
+        .method-card { background: white; border-radius: 10px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .method-card h3 { color: #1a237e; margin-bottom: 15px; }
+        
+        .case-studies { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin: 40px 0; }
+        .case-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .case-header { background: #007bff; padding: 20px; color: white; font-weight: bold; }
+        .case-content { padding: 25px; }
+        .case-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }
+        .case-stat { text-align: center; }
+        .case-value { font-size: 20px; font-weight: bold; color: #007bff; }
+        .case-label { font-size: 12px; color: #666; }
+        
+        .program-comparison { width: 100%; border-collapse: collapse; margin: 40px 0; }
+        .program-comparison th { background: #007bff; color: white; padding: 15px; text-align: left; }
+        .program-comparison td { padding: 15px; border-bottom: 1px solid #eee; }
+        .program-comparison tr:hover { background: #f8f9fa; }
+        .available { color: #28a745; font-weight: bold; }
+        .customizable { color: #ffc107; }
+        
+        .nav-buttons { display: flex; justify-content: space-between; margin: 40px 0; }
+        .nav-btn { padding: 12px 25px; background: #4fc3f7; color: white; text-decoration: none; border-radius: 5px; display: flex; align-items: center; }
+        .nav-btn:hover { background: #03a9f4; }
+        .nav-btn.prev::before { content: '← '; }
+        .nav-btn.next::after { content: ' →'; }
+        
+        footer { background: #0d1b2a; color: #aaa; text-align: center; padding: 40px 20px; font-size: 14px; margin-top: 50px; }
+        footer p { margin: 10px 0; }
+        
+        @media (max-width: 768px) {
+            nav { gap: 15px; }
+            .section-title { font-size: 28px; }
+            .content-section { padding: 20px; }
+            .leadership-levels { grid-template-columns: 1fr; }
+            .journey-steps { flex-direction: column; gap: 30px; }
+            .journey-steps::before { display: none; }
+            .case-studies { grid-template-columns: 1fr; }
+            .case-stats { grid-template-columns: repeat(2, 1fr); }
+            .nav-buttons { flex-direction: column; gap: 15px; }
+            .nav-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">大连<span>君实</span>管理咨询</div>
+            <div class="slogan">专注企业管理咨询与赋能，助力企业卓越发展</div>
+            <nav>
+                <a href="index.html">首页</a>
+                <a href="about.html">关于我们</a>
+                <a href="services.html">核心服务</a>
+                <a href="highlights.html">业务亮点</a>
+                <a href="contact.html">联系我们</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="service-nav">
+        <div class="container">
+            <a href="services.html">核心服务首页</a>
+            <a href="organization-structure.html">组织架构设计</a>
+            <a href="process-optimization.html">业务流程优化</a>
+            <a href="talent-management.html">人才管理体系</a>
+            <a href="leadership-development.html" class="active">领导力发展</a>
+            <a href="sales-training.html">销售技巧培训</a>
+            <a href="ai-strategy.html">AI战略规划</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="section-title">领导力发展</h1>
+        <p style="text-align: center; color: #666; max-width: 800px; margin: 0 auto 40px;">为企业定制多层次、系统化的领导力培养项目，涵盖高管战略领导力、中层管理能力、基层主管技能，构建完整的领导力梯队。借鉴麦肯锡、光辉国际等国际咨询公司领导力发展方法论。</p>
+        
+        <div class="content-section">
+            <h2>🎯 多层次领导力发展体系</h2>
+            <p>针对企业不同层级管理者，提供差异化的领导力发展方案：</p>
+            
+            <div class="leadership-levels">
+                <div class="level-card">
+                    <div class="level-title">
+                        <div class="level-icon">👑</div>
+                        <h3>高管战略领导力</h3>
+                    </div>
+                    <p>面向企业高管团队，聚焦战略思维、变革领导力、组织发展等高层领导能力。</p>
+                    <div class="level-details">
+                        <div class="level-feature">
+                            <div class="feature-icon">✓</div>
+                            <span>战略解码与执行</span>
+                        </div>
+                        <div class="level-feature">
+                            <div class="feature-icon">✓</div>
+                            <span>组织变革领导力</span>
+                        </div>
+                        <div class="level-feature">
+                            <div class="feature-icon">✓</div>
+                            <span>董事会沟通与治理</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-title">
+                        <div class="level-icon">👔</div>
+                        <h3>中层管理能力</h3>
+                    </div>
+                    <p>面向部门经理、总监等中层管理者，提升团队管理、跨部门协作、绩效管理等能力。</p>
+                    <div class="level-details">
+                        <div class="level-feature">
+                            <div class="feature-icon">✓</div>
+                            <span>高效团队建设</span>
+                        </div>
+                        <div class="level-feature">
+                            <div class="feature-icon">✓</div>
+                            <span>战略落地与执行</span>
+                        </div>
+                        <div class="level-feature">
+                            <div class="feature-icon">✓</div>
+                            <span>跨部门协同管理</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-title">
+                        <div class="level-icon">💼</div>
+                        <h3>基层主管技能</h3>
+                    </div>
+                    <p>面向一线主管、班组长等基层管理者，培养基础管理技能、任务分配、员工辅导等能力。</p>
+                    <div class="level-details">
+                        <div class="level-feature">
+                            <div class="feature-icon">✓</div>
+                            <span>任务分配与跟进</span>
+                        </div>
+                        <div class="level-feature">
+                            <div class="feature-icon">✓</div>
+                            <span>员工辅导与反馈</span>
+                        </div>
+                        <div class="level-feature">
+                            <div class="feature-icon">✓</div>
+                            <span>团队日常管理</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="leadership-journey">
+            <h3 style="text-align: center;">领导力发展五步法</h3>
+            <div class="journey-steps">
+                <div class="journey-step">
+                    <div class="step-number">1</div>
+                    <h4>评估诊断</h4>
+                    <p>领导力现状评估</p>
+                </div>
+                <div class="journey-step">
+                    <div class="step-number">2</div>
+                    <h4>方案设计</h4>
+                    <p>定制发展计划</p>
+                </div>
+                <div class="journey-step">
+                    <div class="step-number">3</div>
+                    <h4>能力培养</h4>
+                    <p>系统能力训练</p>
+                </div>
+                <div class="journey-step">
+                    <div class="step-number">4</div>
+                    <h4>实践应用</h4>
+                    <p>真实项目锻炼</p>
+                </div>
+                <div class="journey-step">
+                    <div class="step-number">5</div>
+                    <h4>评估反馈</h4>
+                    <p>效果持续改进</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="toolbox">
+            <h2>🛠️ 领导力发展工具包</h2>
+            
+            <div class="tool-category">
+                <h3>评估诊断工具</h3>
+                <div class="tool-items">
+                    <div class="tool-item">
+                        <div>
+                            <h4>领导力360度评估问卷</h4>
+                            <p style="color: #666; font-size: 14px;">包含20个核心领导力维度的评估工具</p>
+                            <span class="tool-badge">评估工具</span>
+                        </div>
+                        <a href="javascript:void(0);" class="download-btn" onclick="downloadTool('leadership-360-assessment')">下载模板</a>
+                    </div>
+                    <div class="tool-item">
+                        <div>
+                            <h4>管理能力自我评估表</h4>
+                            <p style="color: #666; font-size: 14px;">管理者自我评估和能力差距分析工具</p>
+                            <span class="tool-badge">自评工具</span>
+                        </div>
+                        <a href="javascript:void(0);" class="download-btn" onclick="downloadTool('management-self-assessment')">下载模板</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tool-category">
+                <h3>培训与发展工具</h3>
+                <div class="tool-items">
+                    <div class="tool-item">
+                        <div>
+                            <h4>领导力发展计划模板</h4>
+                            <p style="color: #666; font-size: 14px;">个性化领导力发展计划制定模板</p>
+                            <span class="tool-badge">计划工具</span>
+                        </div>
+                        <a href="javascript:void(0);" class="download-btn" onclick="downloadTool('leadership-development-plan')">下载模板</a>
+                    </div>
+                    <div class="tool-item">
+                        <div>
+                            <h4>团队建设活动手册</h4>
+                            <p style="color: #666; font-size: 14px;">10个经典团队建设活动方案</p>
+                            <span class="tool-badge">活动工具</span>
+                        </div>
+                        <a href="javascript:void(0);" class="download-btn" onclick="downloadTool('team-building-handbook')">下载模板</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tool-category">
+                <h3>辅导与反馈工具</h3>
+                <div class="tool-items">
+                    <div class="tool-item">
+                        <div>
+                            <h4>一对一辅导谈话指南</h4>
+                            <p style="color: #666; font-size: 14px;">结构化一对一辅导谈话模板</p>
+                            <span class="tool-badge">辅导工具</span>
+                        </div>
+                        <a href="javascript:void(0);" class="download-btn" onclick="downloadTool('coaching-conversation-guide')">下载模板</a>
+                    </div>
+                    <div class="tool-item">
+                        <div>
+                            <h4>绩效反馈谈话卡片</h4>
+                            <p style="color: #666; font-size: 14px;">绩效反馈的标准流程和话术</p>
+                            <span class="tool-badge">反馈工具</span>
+                        </div>
+                        <a href="javascript:void(0);" class="download-btn" onclick="downloadTool('performance-feedback-card')">下载模板</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>📚 核心领导力模型</h2>
+            
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <h3>情境领导力模型</h3>
+                    <p>根据不同员工发展阶段（能力与意愿），采取相应的领导风格（指导型、教练型、支持型、授权型）。</p>
+                    <ul>
+                        <li>针对不同员工调整领导方式</li>
+                        <li>提升领导灵活性</li>
+                        <li>提高员工成长效率</li>
+                    </ul>
+                </div>
+                
+                <div class="method-card">
+                    <h3>变革型领导力</h3>
+                    <p>通过愿景激励、智力激发、个性化关怀等方式，引领组织变革和员工成长。</p>
+                    <ul>
+                        <li>建立共同愿景</li>
+                        <li>激发员工潜能</li>
+                        <li>推动组织变革</li>
+                    </ul>
+                </div>
+                
+                <div class="method-card">
+                    <h3>服务型领导力</h3>
+                    <p>领导者以服务员工为首要责任，通过支持、赋能来帮助员工成长和成功。</p>
+                    <ul>
+                        <li>服务为先的领导理念</li>
+                        <li>关注员工成长</li>
+                        <li>建立信任关系</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>📊 成功案例展示</h2>
+            
+            <div class="case-studies">
+                <div class="case-card">
+                    <div class="case-header">某科技公司高管领导力发展项目</div>
+                    <div class="case-content">
+                        <h4>项目背景</h4>
+                        <p>公司从初创期进入成长期，高管团队需要提升战略思维和组织领导能力，应对业务扩张挑战。</p>
+                        <h4>解决方案</h4>
+                        <p>实施高管360度评估→定制化战略领导力课程→组织变革工作坊→一对一高管教练→战略落地行动计划。</p>
+                        <div class="case-stats">
+                            <div class="case-stat">
+                                <div class="case-value">+35%</div>
+                                <div class="case-label">战略执行效率</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">+28%</div>
+                                <div class="case-label">团队协作指数</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">92%</div>
+                                <div class="case-label">高管满意度</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">4.7/5.0</div>
+                                <div class="case-label">项目评分</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">-40%</div>
+                                <div class="case-label">决策时间</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">+30%</div>
+                                <div class="case-label">员工敬业度</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <div class="case-header">某制造企业中层管理能力提升项目</div>
+                    <div class="case-content">
+                        <h4>项目背景</h4>
+                        <p>中层管理者普遍存在重业务轻管理、团队建设能力不足、跨部门协作困难等问题。</p>
+                        <h4>解决方案</h4>
+                        <p>中层管理能力诊断→定制化管理技能培训→团队建设工作坊→跨部门协作项目→管理实践分享会。</p>
+                        <div class="case-stats">
+                            <div class="case-stat">
+                                <div class="case-value">+42%</div>
+                                <div class="case-label">管理能力评分</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">+38%</div>
+                                <div class="case-label">团队绩效</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">-45%</div>
+                                <div class="case-label">部门冲突</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">85%</div>
+                                <div class="case-label">员工留存率</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">+33%</div>
+                                <div class="case-label">跨部门项目成功率</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-value">4.6/5.0</div>
+                                <div class="case-label">培训满意度</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>🏆 行业最佳实践借鉴</h2>
+            
+            <h3>麦肯锡领导力发展方法论</h3>
+            <ul>
+                <li><strong>基于情境的领导力发展</strong>：在不同情境下培养相应领导能力</li>
+                <li><strong>经验式学习</strong>：通过实际项目挑战培养领导力</li>
+                <li><strong>系统化评估与反馈</strong>：建立持续的领导力评估机制</li>
+                <li><strong>组织文化与领导力</strong>：领导力发展与组织文化建设相结合</li>
+            </ul>
+            
+            <h3>光辉国际领导力最佳实践</h3>
+            <ul>
+                <li><strong>领导力品牌建设</strong>：建立独特的领导力品牌和文化</li>
+                <li><strong>数据驱动的人才决策</strong>：基于数据评估和培养领导者</li>
+                <li><strong>继任者计划整合</strong>：领导力发展与继任者计划紧密结合</li>
+                <li><strong>多元化和包容性领导力</strong>：培养包容性领导风格</li>
+            </ul>
+            
+            <table class="program-comparison">
+                <thead>
+                    <tr>
+                        <th>领导力项目类型</th>
+                        <th>高管层</th>
+                        <th>中层</th>
+                        <th>基层</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>360度领导力评估</td>
+                        <td class="available">标准配置</td>
+                        <td class="available">标准配置</td>
+                        <td class="available">可选</td>
+                    </tr>
+                    <tr>
+                        <td>一对一高管教练</td>
+                        <td class="available">标准配置</td>
+                        <td class="customizable">可选</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>战略领导力工作坊</td>
+                        <td class="available">标准配置</td>
+                        <td class="customizable">可选</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>管理技能培训</td>
+                        <td class="customizable">可选</td>
+                        <td class="available">标准配置</td>
+                        <td class="available">标准配置</td>
+                    </tr>
+                    <tr>
+                        <td>团队建设活动</td>
+                        <td class="customizable">可选</td>
+                        <td class="available">标准配置</td>
+                        <td class="available">标准配置</td>
+                    </tr>
+                    <tr>
+                        <td>项目领导实践</td>
+                        <td class="customizable">可选</td>
+                        <td class="available">标准配置</td>
+                        <td class="customizable">可选</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="content-section">
+            <h2>📈 服务流程与报价</h2>
+            
+            <h3>标准服务流程</h3>
+            <ol style="padding-left: 20px; margin-bottom: 30px;">
+                <li><strong>领导力诊断评估（1-2周）</strong>：现状调研、能力评估、需求分析</li>
+                <li><strong>发展方案设计（2-3周）</strong>：个性化发展计划、课程设计、工具开发</li>
+                <li><strong>培训与发展实施（4-8周）</strong>：课程培训、工作坊、教练辅导</li>
+                <li><strong>实践与应用指导（4-12周）</strong>：项目实践、行动学习、跟踪指导</li>
+                <li><strong>效果评估与优化（持续）</strong>：效果评估、持续改进、年度回顾</li>
+            </ol>
+            
+            <h3>服务报价</h3>
+            <p>领导力发展项目根据企业规模、层级覆盖和项目复杂度确定报价：</p>
+            <ul>
+                <li><strong>单一层级领导力项目</strong>：15-40万元（如中层管理能力提升）</li>
+                <li><strong>高管领导力发展项目</strong>：30-80万元（含高管教练和战略工作坊）</li>
+                <li><strong>企业级领导力体系</strong>：50-150万元（全层级、全体系覆盖）</li>
+                <li><strong>年度领导力顾问服务</strong>：25-60万元/年（持续领导力发展支持）</li>
+            </ul>
+            <p style="margin-top: 20px;">具体报价请<a href="contact.html">联系我们</a>获取定制化方案。</p>
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="talent-management.html" class="nav-btn prev">上一服务：人才管理体系</a>
+            <a href="sales-training.html" class="nav-btn next">下一服务：销售技巧培训</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2014-2026 大连君实管理咨询有限公司 版权所有</p>
+            <p>专业创造价值，诚信铸就未来</p>
+        </div>
+    </footer>
+    
+    <script>
+        // 工具下载功能
+        function downloadTool(toolId) {
+            const toolData = {
+                'leadership-360-assessment': {
+                    name: '领导力360度评估问卷.xlsx',
+                    content: '这是包含20个核心领导力维度的评估工具...'
+                },
+                'management-self-assessment': {
+                    name: '管理能力自我评估表.docx',
+                    content: '这是管理者自我评估和能力差距分析工具...'
+                },
+                'leadership-development-plan': {
+                    name: '领导力发展计划模板.docx',
+                    content: '这是个性化领导力发展计划制定模板...'
+                },
+                'team-building-handbook': {
+                    name: '团队建设活动手册.pdf',
+                    content: '这是10个经典团队建设活动方案...'
+                },
+                'coaching-conversation-guide': {
+                    name: '一对一辅导谈话指南.docx',
+                    content: '这是结构化一对一辅导谈话模板...'
+                },
+                'performance-feedback-card': {
+                    name: '绩效反馈谈话卡片.docx',
+                    content: '这是绩效反馈的标准流程和话术...'
+                }
+            };
+            
+            if (toolData[toolId]) {
+                const tool = toolData[toolId];
+                // 模拟下载过程
+                alert(`正在下载：${tool.name}\n\n在实际项目中，我们将提供完整的定制化工具文件。\n\n如需真实文件，请通过咨询联系我们。`);
+                
+                // 记录下载行为
+                console.log(`用户下载了领导力发展工具：${toolId} - ${tool.name}`);
+                
+                // 在实际项目中，这里应该生成真实文件并提供下载
+                // const blob = new Blob([tool.content], { type: 'application/octet-stream' });
+                // const url = window.URL.createObjectURL(blob);
+                // const a = document.createElement('a');
+                // a.href = url;
+                // a.download = tool.name;
+                // a.click();
+            } else {
+                alert('工具正在准备中，请联系我们获取完整工具包。');
+            }
+        }
+        
+        // 领导力旅程步骤动画
+        document.querySelectorAll('.step-number').forEach((num, index) => {
+            num.style.animationDelay = (index * 0.2) + 's';
+        });
+    </script>
+</body>
+</html>
