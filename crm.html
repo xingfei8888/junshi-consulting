@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM系统 - 大连君实管理咨询</title>
+    <style>
+        /* CRM系统专用样式 - 基于现有网站设计语言 */
+        :root {
+            --crm-primary: #2c3e50;
+            --crm-secondary: #34495e;
+            --crm-accent: #3498db;
+            --crm-success: #27ae60;
+            --crm-warning: #f39c12;
+            --crm-danger: #e74c3c;
+            --crm-light: #ecf0f1;
+            --crm-dark: #2c3e50;
+            --crm-border: #bdc3c7;
+            
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 8px rgba(0,0,0,0.15);
+            --shadow-lg: 0 8px 16px rgba(0,0,0,0.2);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* CRM头部 */
+        .crm-header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .crm-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .crm-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .crm-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .crm-logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .crm-logo span {
+            color: #4fc3f7;
+        }
+        
+        .crm-nav {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .crm-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .crm-nav a:hover {
+            color: #4fc3f7;
+        }
+        
+        .crm-nav a.active {
+            color: #4fc3f7;
+        }
+        
+        .crm-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #4fc3f7;
+        }
+        
+        .crm-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: #4fc3f7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* 主内容区 */
+        .crm-main {
+            display: flex;
+            min-height: calc(100vh - 60px);
+        }
+        
+        /* 侧边栏 */
+        .crm-sidebar {
+            width: 250px;
+            background: white;
+            border-right: 1px solid var(--crm-border);
+            padding: 20px 0;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .menu-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--crm-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        .menu-item:hover {
+            background: var(--crm-light);
+            color: var(--crm-accent);
+        }
+        
+        .menu-item.active {
+            background: var(--crm-light);
+            color: var(--crm-accent);
+            border-left-color: var(--crm-accent);
+        }
+        
+        .menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* 内容区 */
+        .crm-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        /* 仪表板 */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 16px;
+            color: var(--crm-secondary);
+            font-weight: 600;
+        }
+        
+        .card-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--crm-primary);
+            margin-bottom: 10px;
+        }
+        
+        .card-change {
+            font-size: 14px;
+            color: var(--crm-success);
+        }
+        
+        .card-change.negative {
+            color: var(--crm-danger);
+        }
+        
+        /* 客户表格 */
+        .crm-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .crm-table th {
+            background: var(--crm-light);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--crm-secondary);
+            border-bottom: 2px solid var(--crm-border);
+        }
+        
+        .crm-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--crm-border);
+        }
+        
+        .crm-table tr:hover {
+            background: var(--crm-light);
+        }
+        
+        /* 按钮 */
+        .btn {
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-primary {
+            background: var(--crm-accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-success {
+            background: var(--crm-success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #219653;
+        }
+        
+        .btn-warning {
+            background: var(--crm-warning);
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            background: #e67e22;
+        }
+        
+        .btn-danger {
+            background: var(--crm-danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        
+        .btn-sm {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+        
+        /* 标签 */
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .tag-new {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .tag-followup {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .tag-contacted {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .tag-deal {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .tag-lost {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* 表单 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--crm-secondary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--crm-border);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--crm-accent);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--crm-primary);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--crm-secondary);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .crm-main {
+                flex-direction: column;
+            }
+            
+            .crm-sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--crm-border);
+            }
+            
+            .sidebar-menu {
+                display: flex;
+                overflow-x: auto;
+            }
+            
+            .menu-item {
+                white-space: nowrap;
+                border-left: none;
+                border-bottom: 3px solid transparent;
+            }
+            
+            .menu-item.active {
+                border-left: none;
+                border-bottom-color: var(--crm-accent);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- CRM头部 -->
+    <header class="crm-header">
+        <div class="crm-container">
+            <div class="crm-header-content">
+                <div class="crm-brand">
+                    <div class="crm-logo">
+                        君实<span>CRM</span>
+                    </div>
+                    <div style="font-size: 14px; opacity: 0.9;">大连君实管理咨询客户关系管理系统</div>
+                </div>
+                
+                <nav class="crm-nav">
+                    <a href="index.html" target="_blank">公司官网</a>
+                    <a href="crm-index.html" class="active">CRM系统</a>
+                    <a href="#">销售管道</a>
+                    <a href="#">任务管理</a>
+                    <a href="#">报表分析</a>
+                </nav>
+                
+                <div class="crm-user">
+                    <div class="user-avatar">管</div>
+                    <div>
+                        <div style="font-size: 14px; font-weight: 500;">管理员</div>
+                        <div style="font-size: 12px; opacity: 0.8;">大连君实管理咨询</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="crm-main">
+        <!-- 侧边栏 -->
+        <aside class="crm-sidebar">
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="#dashboard" class="menu-item active">
+                        <i>📊</i>
+                        <span>仪表板</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#customers" class="menu-item">
+                        <i>👥</i>
+                        <span>客户管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#opportunities" class="menu-item">
+                        <i>🎯</i>
+                        <span>销售管道</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tasks" class="menu-item">
+                        <i>✅</i>
+                        <span>任务管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#activities" class="menu-item">
+                        <i>📝</i>
+                        <span>活动记录</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#reports" class="menu-item">
+                        <i>📈</i>
+                        <span>报表分析</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#settings" class="menu-item">
+                        <i>⚙️</i>
+                        <span>系统设置</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- 内容区 -->
+        <div class="crm-content">
+            <!-- 仪表板 -->
+            <div id="dashboard" class="content-section active">
+                <h1 style="font-size: 28px; margin-bottom: 20px; color: var(--crm-primary);">CRM仪表板</h1>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <div class="card-title">总客户数</div>
+                            <div style="color: var(--crm-accent); font-size: 24px;">👥</div>
+                        </div>
+                        <div class="card-value" id="totalCustomers">0</div>
+                        <div class="card-change">今日新增: <span id="newToday">0</span></div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <div class="card-title">进行中商机</div>
+                            <div style="color: var(--crm-warning); font-size: 24px;">🎯</div>
+                        </div>
+                        <div class="card-value" id="totalOpportunities">0</div>
+                        <div class="card-change">本月预计收入: <span id="monthlyRevenue">¥0</span></div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <div class="card-title">待办任务</div>
+                            <div style="color: var(--crm-danger); font-size: 24px;">✅</div>
+                        </div>
+                        <div class="card-value" id="pendingTasks">0</div>
+                        <div class="card-change">今日到期: <span id="dueToday">0</span></div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <div class="card-title">本月成交</div>
+                            <div style="color: var(--crm-success); font-size: 24px;">💰</div>
+                        </div>
+                        <div class="card-value" id="monthlyDeals">0</div>
+                        <div class="card-change">成交金额: <span id="dealAmount">¥0</span></div>
+                    </div>
+                </div>
+                
+                <!-- 最近客户 -->
+                <div style="margin-top: 30px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h2 style="font-size: 20px; color: var(--crm-primary);">最近新增客户</h2>
+                        <button class="btn btn-primary" onclick="showAddCustomerModal()">
+                            <span>+</span>
+                            新增客户
+                        </button>
+                    </div>
+                    
+                    <table class="crm-table" id="recentCustomersTable">
+                        <thead>
+                            <tr>
+                                <th>客户名称</th>
+                                <th>联系人</th>
+                                <th>联系电话</th>
+                                <th>客户来源</th>
+                                <th>状态</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentCustomersBody">
+                            <!-- 动态加载数据 -->
+                        </tbody>
+                    </table>
+                    
+                    <div style="text-align: center; margin-top: 20px; padding: 10px; color: var(--crm-secondary);">
+                        暂无客户数据，点击"新增客户"按钮添加第一个客户
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 新增客户模态框 -->
+    <div class="modal" id="addCustomerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">新增客户</div>
+                <button class="modal-close" onclick="closeAddCustomerModal()">×</button>
+            </div>
+            
+            <form id="customerForm" onsubmit="saveCustomer(event)">
+                <div class="form-group">
+                    <label class="form-label">客户名称 *</label>
+                    <input type="text" class="form-control" id="customerName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">联系人</label>
+                    <input type="text" class="form-control" id="contactPerson">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">联系电话</label>
+                    <input type="tel" class="form-control" id="contactPhone">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">邮箱地址</label>
+                    <input type="email" class="form-control" id="contactEmail">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">公司地址</label>
+                    <input type="text" class="form-control" id="companyAddress">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">客户来源</label>
+                    <select class="form-control" id="customerSource">
+                        <option value="">请选择来源</option>
+                        <option value="website">公司网站</option>
+                        <option value="referral">客户推荐</option>
+                        <option value="event">行业活动</option>
+                        <option value="outreach">主动开发</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">客户状态</label>
+                    <select class="form-control" id="customerStatus">
+                        <option value="new">新客户</option>
+                        <option value="contacted">已联系</option>
+                        <option value="qualified">已确认需求</option>
+                        <option value="proposal">方案报价中</option>
+                        <option value="negotiation">谈判中</option>
+                        <option value="closed">已成交</option>
+                        <option value="lost">已流失</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">备注</label>
+                    <textarea class="form-control" id="customerNotes" rows="3"></textarea>
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">保存客户</button>
+                    <button type="button" class="btn" onclick="closeAddCustomerModal()" style="flex: 1; background: var(--crm-border);">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // CRM数据存储
+        class CRMStorage {
+            constructor() {
+                this.customersKey = 'junshi_crm_customers';
+                this.opportunitiesKey = 'junshi_crm_opportunities';
+                this.tasksKey = 'junshi_crm_tasks';
+                this.activitiesKey = 'junshi_crm_activities';
+            }
+            
+            // 客户管理
+            getCustomers() {
+                const customers = localStorage.getItem(this.customersKey);
+                return customers ? JSON.parse(customers) : [];
+            }
+            
+            saveCustomers(customers) {
+                localStorage.setItem(this.customersKey, JSON.stringify(customers));
+            }
+            
+            addCustomer(customer) {
+                const customers = this.getCustomers();
+                customer.id = Date.now();
+                customer.createdAt = new Date().toISOString();
+                customer.updatedAt = new Date().toISOString();
+                customers.push(customer);
+                this.saveCustomers(customers);
+                return customer;
+            }
+            
+            updateCustomer(id, updates) {
+                const customers = this.getCustomers();
+                const index = customers.findIndex(c => c.id === id);
+                if (index !== -1) {
+                    customers[index] = {...customers[index], ...updates, updatedAt: new Date().toISOString()};
+                    this.saveCustomers(customers);
+                    return true;
+                }
+                return false;
+            }
+            
+            deleteCustomer(id) {
+                const customers = this.getCustomers();
+                const filtered = customers.filter(c => c.id !== id);
+                this.saveCustomers(filtered);
+                return filtered.length !== customers.length;
+            }
+            
+            // 导出数据
+            exportData() {
+                const data = {
+                    customers: this.getCustomers(),
+                    opportunities: [],
+                    tasks: [],
+                    activities: [],
+                    exportedAt: new Date().toISOString()
+                };
+                return JSON.stringify(data, null, 2);
+            }
+            
+            // 导入数据
+            importData(jsonData) {
+                try {
+                    const data = JSON.parse(jsonData);
+                    if (data.customers) {
+                        localStorage.setItem(this.customersKey, JSON.stringify(data.customers));
+                    }
+                    return true;
+                } catch (error) {
+                    console.error('导入数据失败:', error);
+                    return false;
+                }
+            }
+        }
+        
+        // 初始化CRM
+        const crmStorage = new CRMStorage();
+        
+        // 仪表板数据更新
+        function updateDashboard() {
+            const customers = crmStorage.getCustomers();
+            const today = new Date().toISOString().split('T')[0];
+            
+            // 总客户数
+            document.getElementById('totalCustomers').textContent = customers.length;
+            
+            // 今日新增
+            const newToday = customers.filter(c => c.createdAt.split('T')[0] === today).length;
+            document.getElementById('newToday').textContent = newToday;
+            
+            // 更新最近客户表格
+            updateRecentCustomersTable();
+        }
+        
+        // 更新最近客户表格
+        function updateRecentCustomersTable() {
+            const customers = crmStorage.getCustomers();
+            const tbody = document.getElementById('recentCustomersBody');
+            
+            tbody.innerHTML = '';
+            
+            // 按创建时间排序，取最近5个
+            const recentCustomers = customers
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                .slice(0, 5);
+            
+            if (recentCustomers.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 40px; color: var(--crm-secondary);">
+                            暂无客户数据，点击"新增客户"按钮添加第一个客户
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            recentCustomers.forEach(customer => {
+                const row = document.createElement('tr');
+                
+                // 格式化日期
+                const createdAt = new Date(customer.createdAt);
+                const formattedDate = `${createdAt.getFullYear()}-${(createdAt.getMonth()+1).toString().padStart(2, '0')}-${createdAt.getDate().toString().padStart(2, '0')}`;
+                
+                // 状态标签
+                let statusTag = '';
+                let statusText = '';
+                switch(customer.status) {
+                    case 'new': statusTag = 'tag-new'; statusText = '新客户'; break;
+                    case 'contacted': statusTag = 'tag-contacted'; statusText = '已联系'; break;
+                    case 'qualified': statusTag = 'tag-followup'; statusText = '已确认需求'; break;
+                    case 'proposal': statusTag = 'tag-followup'; statusText = '方案报价中'; break;
+                    case 'negotiation': statusTag = 'tag-followup'; statusText = '谈判中'; break;
+                    case 'closed': statusTag = 'tag-deal'; statusText = '已成交'; break;
+                    case 'lost': statusTag = 'tag-lost'; statusText = '已流失'; break;
+                }
+                
+                row.innerHTML = `
+                    <td style="font-weight: 500;">${customer.name || '未命名客户'}</td>
+                    <td>${customer.contactPerson || '--'}</td>
+                    <td>${customer.contactPhone || '--'}</td>
+                    <td>${customer.source || '--'}</td>
+                    <td><span class="tag ${statusTag}">${statusText}</span></td>
+                    <td>${formattedDate}</td>
+                    <td>
+                        <button class="btn btn-sm" onclick="viewCustomer(${customer.id})" style="background: var(--crm-light); margin-right: 5px;">查看</button>
+                        <button class="btn btn-sm btn-warning" onclick="editCustomer(${customer.id})">编辑</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteCustomer(${customer.id})">删除</button>
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+        
+        // 模态框控制
+        function showAddCustomerModal() {
+            document.getElementById('addCustomerModal').classList.add('active');
+            document.getElementById('customerForm').reset();
+        }
+        
+        function closeAddCustomerModal() {
+            document.getElementById('addCustomerModal').classList.remove('active');
+        }
+        
+        // 保存客户
+        function saveCustomer(event) {
+            event.preventDefault();
+            
+            const customer = {
+                name: document.getElementById('customerName').value,
+                contactPerson: document.getElementById('contactPerson').value,
+                contactPhone: document.getElementById('contactPhone').value,
+                contactEmail: document.getElementById('contactEmail').value,
+                companyAddress: document.getElementById('companyAddress').value,
+                source: document.getElementById('customerSource').value,
+                status: document.getElementById('customerStatus').value,
+                notes: document.getElementById('customerNotes').value
+            };
+            
+            crmStorage.addCustomer(customer);
+            updateDashboard();
+            closeAddCustomerModal();
+            
+            // 显示成功提示
+            alert('客户添加成功！');
+        }
+        
+        // 查看客户
+        function viewCustomer(id) {
+            const customers = crmStorage.getCustomers();
+            const customer = customers.find(c => c.id === id);
+            if (customer) {
+                alert(`客户详情：\n\n客户名称：${customer.name || '未命名'}\n联系人：${customer.contactPerson || '--'}\n电话：${customer.contactPhone || '--'}\n邮箱：${customer.contactEmail || '--'}\n状态：${customer.status}\n备注：${customer.notes || '无'}`);
+            }
+        }
+        
+        // 编辑客户
+        function editCustomer(id) {
+            const customers = crmStorage.getCustomers();
+            const customer = customers.find(c => c.id === id);
+            if (customer) {
+                // 填充表单
+                document.getElementById('customerName').value = customer.name || '';
+                document.getElementById('contactPerson').value = customer.contactPerson || '';
+                document.getElementById('contactPhone').value = customer.contactPhone || '';
+                document.getElementById('contactEmail').value = customer.contactEmail || '';
+                document.getElementById('companyAddress').value = customer.companyAddress || '';
+                document.getElementById('customerSource').value = customer.source || '';
+                document.getElementById('customerStatus').value = customer.status || 'new';
+                document.getElementById('customerNotes').value = customer.notes || '';
+                
+                // 修改保存逻辑
+                const form = document.getElementById('customerForm');
+                form.onsubmit = function(event) {
+                    event.preventDefault();
+                    
+                    const updates = {
+                        name: document.getElementById('customerName').value,
+                        contactPerson: document.getElementById('contactPerson').value,
+                        contactPhone: document.getElementById('contactPhone').value,
+                        contactEmail: document.getElementById('contactEmail').value,
+                        companyAddress: document.getElementById('companyAddress').value,
+                        source: document.getElementById('customerSource').value,
+                        status: document.getElementById('customerStatus').value,
+                        notes: document.getElementById('customerNotes').value
+                    };
+                    
+                    if (crmStorage.updateCustomer(id, updates)) {
+                        updateDashboard();
+                        closeAddCustomerModal();
+                        alert('客户信息更新成功！');
+                    }
+                };
+                
+                showAddCustomerModal();
+            }
+        }
+        
+        // 删除客户
+        function deleteCustomer(id) {
+            if (confirm('确定要删除这个客户吗？此操作不可恢复。')) {
+                if (crmStorage.deleteCustomer(id)) {
+                    updateDashboard();
+                    alert('客户删除成功！');
+                }
+            }
+        }
+        
+        // 数据导出
+        function exportData() {
+            const data = crmStorage.exportData();
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `junshi-crm-backup-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        // 数据导入
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = function(event) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    if (crmStorage.importData(e.target.result)) {
+                        updateDashboard();
+                        alert('数据导入成功！');
+                    } else {
+                        alert('数据导入失败，请检查文件格式。');
+                    }
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+        
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDashboard();
+            
+            // 侧边栏菜单点击
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 移除所有active
+                    document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                    
+                    // 添加当前active
+                    this.classList.add('active');
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+                });
+            });
+            
+            // 点击模态框外部关闭
+            document.getElementById('addCustomerModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeAddCustomerModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
