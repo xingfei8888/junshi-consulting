@@ -78,10 +78,10 @@
             <div class="logo">大连<span>君实</span>管理咨询</div>
             <div class="slogan">专注企业管理咨询与赋能，助力企业卓越发展</div>
             <nav>
-                <a href="#about">关于我们</a>
-                <a href="#services">核心服务</a>
-                <a href="#highlights">业务亮点</a>
-                <a href="#contact">联系我们</a>
+                <a href="about.html">关于我们</a>
+                <a href="services.html">核心服务</a>
+                <a href="highlights.html">业务亮点</a>
+                <a href="contact.html">联系我们</a>
             </nav>
         </div>
     </header>
@@ -91,7 +91,7 @@
         <div class="container">
             <h1>赋能组织变革，驱动业务增长</h1>
             <p>自2014年起，我们为国企和大型企业提供专业的管理咨询、组织设计、流程优化及人才发展解决方案，助力企业实现数字化转型与智能化升级。</p>
-            <a href="#contact" class="btn">获取咨询方案</a>
+            <a href="contact.html" class="btn">获取咨询方案</a>
         </div>
     </section>
 
@@ -222,8 +222,8 @@
     <footer>
         <div class="container">
             <p>© 2014-2026 大连君实管理咨询有限公司 版权所有</p>
-            <p>辽ICP备XXXXXXXX号</p>
             <p>专业创造价值，诚信铸就未来</p>
+            <!-- 已移除备案号字样 -->
         </div>
     </footer>
 
@@ -238,11 +238,15 @@
         // 平滑滚动
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                // 不再阻止默认行为，允许跳转到二级页面
+                // 只有锚点链接才平滑滚动
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
