@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组织架构设计 - 大连君实管理咨询有限公司</title>
+    <meta name="description" content="专业的组织架构设计咨询服务，帮助企业在不同发展阶段建立科学高效的组织结构，明确职责分工，提升组织效能。借鉴麦肯锡、德勤等国际咨询公司方法论，结合中国企业管理实践。">
+    <meta name="keywords" content="组织架构设计,组织优化,岗位职责,部门设置,组织诊断,权责体系,国企组织架构,麦肯锡组织模型">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header { background: linear-gradient(135deg, #1a237e 0%, #283593 100%); color: white; padding: 20px 0; }
+        .logo { font-size: 28px; font-weight: bold; margin-bottom: 10px; }
+        .logo span { color: #4fc3f7; }
+        .slogan { font-size: 16px; opacity: 0.9; margin-bottom: 20px; }
+        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
+        nav a { color: white; text-decoration: none; font-size: 16px; padding: 5px 0; position: relative; }
+        nav a:hover::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: #4fc3f7; }
+        
+        .service-nav { background: #e3f2fd; padding: 15px 0; margin: 20px 0; border-radius: 10px; }
+        .service-nav .container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .service-nav a { color: #1a237e; text-decoration: none; padding: 8px 15px; border-radius: 20px; background: white; font-size: 14px; transition: all 0.3s; }
+        .service-nav a:hover { background: #4fc3f7; color: white; }
+        .service-nav a.active { background: #4fc3f7; color: white; }
+        
+        .section-title { text-align: center; font-size: 32px; margin: 40px 0 30px; color: #1a237e; position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: #4fc3f7; margin: 10px auto; }
+        
+        .content-section { background: white; border-radius: 10px; padding: 40px; margin: 30px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .content-section h2 { color: #1a237e; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e3f2fd; }
+        
+        .methodology-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 40px 0; }
+        .method-card { background: white; border-radius: 10px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 4px solid #4fc3f7; }
+        .method-icon { font-size: 40px; color: #4fc3f7; margin-bottom: 20px; }
+        
+        .case-studies { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin: 40px 0; }
+        .case-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .case-header { background: #e3f2fd; padding: 20px; color: #1a237e; font-weight: bold; }
+        .case-content { padding: 25px; }
+        .case-tag { display: inline-block; padding: 4px 10px; background: #4fc3f7; color: white; border-radius: 4px; font-size: 12px; margin-right: 10px; margin-bottom: 10px; }
+        
+        .tool-download { background: #e8f5e9; border-radius: 10px; padding: 30px; margin: 40px 0; }
+        .tool-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: white; border-radius: 5px; margin-bottom: 15px; }
+        .download-btn { background: #4fc3f7; color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; }
+        .download-btn:hover { background: #03a9f4; }
+        
+        .industry-best { background: #fff3cd; border-radius: 10px; padding: 30px; margin: 40px 0; }
+        .best-list { list-style: none; padding-left: 0; }
+        .best-list li { padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1); display: flex; align-items: center; }
+        .best-list li::before { content: '✓'; color: #4fc3f7; font-weight: bold; margin-right: 15px; font-size: 18px; }
+        
+        .nav-buttons { display: flex; justify-content: space-between; margin: 40px 0; }
+        .nav-btn { padding: 12px 25px; background: #4fc3f7; color: white; text-decoration: none; border-radius: 5px; display: flex; align-items: center; }
+        .nav-btn:hover { background: #03a9f4; }
+        .nav-btn.prev::before { content: '← '; }
+        .nav-btn.next::after { content: ' →'; }
+        
+        footer { background: #0d1b2a; color: #aaa; text-align: center; padding: 40px 20px; font-size: 14px; margin-top: 50px; }
+        footer p { margin: 10px 0; }
+        
+        @media (max-width: 768px) {
+            nav { gap: 15px; }
+            .section-title { font-size: 28px; }
+            .content-section { padding: 20px; }
+            .methodology-grid { grid-template-columns: 1fr; }
+            .case-studies { grid-template-columns: 1fr; }
+            .nav-buttons { flex-direction: column; gap: 15px; }
+            .nav-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">大连<span>君实</span>管理咨询</div>
+            <div class="slogan">专注企业管理咨询与赋能，助力企业卓越发展</div>
+            <nav>
+                <a href="index.html">首页</a>
+                <a href="about.html">关于我们</a>
+                <a href="services.html">核心服务</a>
+                <a href="highlights.html">业务亮点</a>
+                <a href="contact.html">联系我们</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="service-nav">
+        <div class="container">
+            <a href="services.html">核心服务首页</a>
+            <a href="organization-structure.html" class="active">组织架构设计</a>
+            <a href="process-optimization.html">业务流程优化</a>
+            <a href="talent-management.html">人才管理体系</a>
+            <a href="leadership-development.html">领导力发展</a>
+            <a href="sales-training.html">销售技巧培训</a>
+            <a href="ai-strategy.html">AI战略规划</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="section-title">组织架构设计</h1>
+        <p style="text-align: center; color: #666; max-width: 800px; margin: 0 auto 40px;">为企业设计科学合理的组织架构，明确权责关系，提升组织运行效率，支持战略目标实现。借鉴麦肯锡7S模型、德勤组织设计方法论，结合中国企业管理实践。</p>
+        
+        <div class="content-section">
+            <h2>🏢 我们的组织设计方法论</h2>
+            <p>基于国际先进的组织设计理论，结合中国企业实际情况，我们形成了独特的组织架构设计方法论体系：</p>
+            
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <div class="method-icon">🔍</div>
+                    <h3>组织诊断与分析</h3>
+                    <p>采用麦肯锡7S模型、组织健康度评估等工具，全面诊断组织现状，识别核心问题与改进机会。</p>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon">📐</div>
+                    <h3>架构优化设计</h3>
+                    <p>根据企业战略、业务模式和发展阶段，设计适合的组织结构形式（职能制、事业部制、矩阵制等）。</p>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon">⚖️</div>
+                    <h3>权责体系构建</h3>
+                    <p>明确各部门、岗位的职责权限，建立清晰的报告关系和决策流程，消除职责重叠与空白。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>🎯 服务内容详解</h2>
+            
+            <h3>1. 组织诊断与评估</h3>
+            <ul>
+                <li><strong>组织有效性评估</strong>：评估组织对战略的支撑程度</li>
+                <li><strong>流程效率分析</strong>：识别流程瓶颈和效率提升点</li>
+                <li><strong>管理幅度诊断</strong>：优化管理层级和汇报关系</li>
+                <li><strong>企业文化适配度</strong>：评估组织与文化匹配度</li>
+            </ul>
+            
+            <h3>2. 组织架构优化设计</h3>
+            <ul>
+                <li><strong>组织结构选择</strong>：选择最适合的组织形式（U型、M型、H型、矩阵型）</li>
+                <li><strong>部门设置优化</strong>：科学划分部门，明确职责边界</li>
+                <li><strong>管理层级设计</strong>：优化管理层级，提升决策效率</li>
+                <li><strong>协同机制建立</strong>：建立跨部门协作流程和机制</li>
+            </ul>
+            
+            <h3>3. 岗位职责体系构建</h3>
+            <ul>
+                <li><strong>岗位说明书制定</strong>：明确岗位职责、任职要求和绩效标准</li>
+                <li><strong>职责权限划分</strong>：清晰界定决策权限和审批流程</li>
+                <li><strong>工作流程标准化</strong>：建立标准化工作流程和操作规范</li>
+                <li><strong>绩效关联设计</strong>：将职责履行与绩效考核有效挂钩</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>📊 成功案例展示</h2>
+            
+            <div class="case-studies">
+                <div class="case-card">
+                    <div class="case-header">某大型国企集团组织重构项目</div>
+                    <div class="case-content">
+                        <div class="case-tag">组织诊断</div>
+                        <div class="case-tag">架构优化</div>
+                        <div class="case-tag">国企改革</div>
+                        <h4>项目背景</h4>
+                        <p>企业集团规模扩张迅速，但组织结构滞后，存在部门重叠、职责不清、决策缓慢等问题。</p>
+                        <h4>解决方案</h4>
+                        <p>实施组织诊断→设计事业部制结构→明确集团与子公司权责→建立协同机制。</p>
+                        <h4>项目成果</h4>
+                        <p>决策效率提升40%，跨部门协作效率提升35%，管理成本降低25%。</p>
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <div class="case-header">某科技公司数字化转型组织适配</div>
+                    <div class="case-content">
+                        <div class="case-tag">数字化转型</div>
+                        <div class="case-tag">敏捷组织</div>
+                        <div class="case-tag">流程再造</div>
+                        <h4>项目背景</h4>
+                        <p>传统职能制组织无法适应数字化转型需求，产品开发周期长，市场响应慢。</p>
+                        <h4>解决方案</h4>
+                        <p>引入产品事业部制→组建跨职能敏捷团队→建立数字化决策中心→优化创新机制。</p>
+                        <h4>项目成果</h4>
+                        <p>产品上市时间缩短50%，客户满意度提升30%，创新项目成功率提高40%。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tool-download">
+            <h2>🛠️ 实用工具下载</h2>
+            <p>以下工具模板可供企业自行评估和使用：</p>
+            
+            <div class="tool-item">
+                <div>
+                    <h4>组织健康度评估问卷</h4>
+                    <p style="color: #666; font-size: 14px;">包含50个评估指标，帮助企业全面评估组织健康状况</p>
+                </div>
+                <a href="#" class="download-btn">下载模板</a>
+            </div>
+            
+            <div class="tool-item">
+                <div>
+                    <h4>岗位说明书模板</h4>
+                    <p style="color: #666; font-size: 14px;">标准化岗位说明书模板，包含职责、权限、任职要求等</p>
+                </div>
+                <a href="#" class="download-btn">下载模板</a>
+            </div>
+            
+            <div class="tool-item">
+                <div>
+                    <h4>组织结构设计检查清单</h4>
+                    <p style="color: #666; font-size: 14px;">包含组织设计的关键要素和注意事项检查清单</p>
+                </div>
+                <a href="#" class="download-btn">下载模板</a>
+            </div>
+        </div>
+        
+        <div class="industry-best">
+            <h2>🏆 行业最佳实践借鉴</h2>
+            <p>我们深入研究并借鉴了国际国内优秀咨询公司的组织设计方法论：</p>
+            
+            <h3>麦肯锡7S模型</h3>
+            <ul class="best-list">
+                <li><strong>战略</strong>：组织设计必须支持战略实现</li>
+                <li><strong>结构</strong>：清晰的组织结构是高效运营的基础</li>
+                <li><strong>制度</strong>：完善的管理制度保障组织运行</li>
+                <li><strong>风格</strong>：领导风格影响组织文化</li>
+                <li><strong>人员</strong>：合适的人在合适的岗位</li>
+                <li><strong>技能</strong>：组织需要的关键能力</li>
+                <li><strong>共同价值观</strong>：组织的核心价值观</li>
+            </ul>
+            
+            <h3>德勤组织设计六要素</h3>
+            <ul class="best-list">
+                <li><strong>工作设计</strong>：如何组织和分配工作</li>
+                <li><strong>组织结构</strong>：部门的划分和协调</li>
+                <li><strong>决策权分配</strong>：谁做什么决定</li>
+                <li><strong>信息流</strong>：信息如何传递</li>
+                <li><strong>激励机制</strong>：如何激励员工</li>
+                <li><strong>人才管理</strong>：如何吸引和保留人才</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>📈 服务流程与报价</h2>
+            
+            <h3>标准服务流程</h3>
+            <ol style="padding-left: 20px; margin-bottom: 30px;">
+                <li><strong>初步诊断（1-2周）</strong>：现场调研、访谈、数据收集</li>
+                <li><strong>方案设计（2-3周）</strong>：组织架构设计、职责划分、流程优化</li>
+                <li><strong>方案评审（1周）</strong>：与客户讨论、修改、完善方案</li>
+                <li><strong>实施辅导（2-4周）</strong>：协助方案落地、培训、调整</li>
+                <li><strong>效果评估（1周）</strong>：评估实施效果、持续优化</li>
+            </ol>
+            
+            <h3>服务报价</h3>
+            <p>组织架构设计项目通常根据企业规模、项目复杂度和实施周期确定报价：</p>
+            <ul>
+                <li><strong>中小企业组织优化</strong>：8-20万元</li>
+                <li><strong>大型企业组织重构</strong>：25-60万元</li>
+                <li><strong>集团化组织设计</strong>：50-100万元</li>
+                <li><strong>年度组织顾问服务</strong>：15-30万元/年</li>
+            </ul>
+            <p style="margin-top: 20px;">具体报价请<a href="contact.html">联系我们</a>获取定制化方案。</p>
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="services.html" class="nav-btn prev">返回核心服务首页</a>
+            <a href="process-optimization.html" class="nav-btn next">下一服务：业务流程优化</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2014-2026 大连君实管理咨询有限公司 版权所有</p>
+            <p>专业创造价值，诚信铸就未来</p>
+        </div>
+    </footer>
+    
+    <script>
+        // 工具下载模拟
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('感谢您的下载！模板文件已准备就绪。在实际项目中，我们会提供完整的定制化工具和指导。');
+            });
+        });
+    </script>
+</body>
+</html>
