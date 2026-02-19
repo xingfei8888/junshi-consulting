@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客户管理 - 君实CRM</title>
+    <style>
+        body { font-family: 'Microsoft YaHei', sans-serif; margin: 0; padding: 0; background: #f8f9fa; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .crm-header { 
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%); 
+            color: white; padding: 15px 20px; 
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .logo { font-size: 24px; font-weight: bold; }
+        .logo span { color: #4fc3f7; }
+        .nav { display: flex; gap: 20px; }
+        .nav a { color: white; text-decoration: none; padding: 5px 0; position: relative; }
+        .nav a:hover::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: #4fc3f7; }
+        .btn { 
+            background: #4fc3f7; color: white; padding: 8px 16px; 
+            border: none; border-radius: 4px; cursor: pointer;
+            font-size: 14px; transition: background 0.3s;
+        }
+        .btn:hover { background: #03a9f4; }
+        .btn-success { background: #27ae60; }
+        .btn-success:hover { background: #219653; }
+        .btn-warning { background: #f39c12; }
+        .btn-warning:hover { background: #e67e22; }
+        .btn-danger { background: #e74c3c; }
+        .btn-danger:hover { background: #c0392b; }
+        .table { width: 100%; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; }
+        .table th { background: #f1f8ff; padding: 15px; text-align: left; font-weight: 600; color: #2c3e50; }
+        .table td { padding: 12px 15px; border-bottom: 1px solid #eee; }
+        .tag { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+        .tag-new { background: #d4edda; color: #155724; }
+        .tag-contacted { background: #d1ecf1; color: #0c5460; }
+        .tag-followup { background: #fff3cd; color: #856404; }
+        .tag-deal { background: #d4edda; color: #155724; }
+        .tag-lost { background: #f8d7da; color: #721c24; }
+        .search-box { 
+            padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; 
+            width: 300px; font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        .search-box:focus { outline: none; border-color: #4fc3f7; box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.2); }
+    </style>
+</head>
+<body>
+    <header class="crm-header">
+        <div class="logo">君实<span>CRM</span></div>
+        <nav class="nav">
+            <a href="crm.html">仪表板</a>
+            <a href="customers.html" style="color: #4fc3f7;">客户管理</a>
+            <a href="opportunities.html">销售管道</a>
+            <a href="reports.html">报表分析</a>
+            <a href="index.html">返回官网</a>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h1 style="color: #2c3e50; margin-bottom: 20px; font-size: 28px;">客户管理</h1>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <button class="btn btn-success" onclick="showAddForm()" style="display: flex; align-items: center; gap: 6px;">
+                <span style="font-size: 18px;">+</span>
+                新增客户
+            </button>
+            <div>
+                <input type="text" id="searchInput" class="search-box" placeholder="搜索客户名称、联系人、电话...">
+            </div>
+        </div>
+        
+        <div style="background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            <div style="display: flex; gap: 20px; margin-bottom: 15px;">
+                <div>
+                    <span style="color: #666; font-size: 14px;">总客户数：</span>
+                    <span style="font-size: 24px; font-weight: bold; color: #2c3e50;" id="totalCustomers">0</span>
+                </div>
+                <div>
+                    <span style="color: #666; font-size: 14px;">新客户：</span>
+                    <span style="font-size: 24px; font-weight: bold; color: #27ae60;" id="newCustomers">0</span>
+                </div>
+                <div>
+                    <span style="color: #666; font-size: 14px;">已联系：</span>
+                    <span style="font-size: 24px; font-weight: bold; color: #3498db;" id="contactedCustomers">0</span>
+                </div>
+                <div>
+                    <span style="color: #666; font-size: 14px;">已成交：</span>
+                    <span style="font-size: 24px; font-weight: bold; color: #9b59b6;" id="closedCustomers">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>客户名称</th>
+                    <th>联系人</th>
+                    <th>电话</th>
+                    <th>邮箱</th>
+                    <th>来源</th>
+                    <th>状态</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="customerTableBody">
+                <!-- 动态加载 -->
+            </tbody>
+        </table>
+        
+        <div style="text-align: center; margin-top: 20px; color: #666; padding: 20px;" id="loadingText">
+            正在加载客户数据...
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">数据管理</h3>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" onclick="exportData()" style="background: #34495e;">
+                    导出数据
+                </button>
+                <button class="btn" onclick="importData()" style="background: #7f8c8d;">
+                    导入数据
+                </button>
+                <button class="btn btn-danger" onclick="clearAllData()">
+                    清空数据
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 客户数据管理
+        class CustomerManager {
+            constructor() {
+                this.storageKey = 'junshi_crm_customers';
+                // 初始化示例数据
+                this.initializeSampleData();
+            }
+            
+            initializeSampleData() {
+                const existingData = localStorage.getItem(this.storageKey);
+                if (!existingData) {
+                    const sampleCustomers = [
+                        {
+                            id: 1,
+                            name: '大连某国企',
+                            contactPerson: '王经理',
+                            phone: '0411-12345678',
+                            email: 'wang@example.com',
+                            source: '网站咨询',
+                            status: 'contacted',
+                            notes: '需要组织架构优化服务',
+                            createdAt: '2026-01-15T10:30:00Z'
+                        },
+                        {
+                            id: 2,
+                            name: '某制造企业',
+                            contactPerson: '李总',
+                            phone: '0411-87654321',
+                            email: 'li@example.com',
+                            source: '客户推荐',
+                            status: 'followup',
+                            notes: '流程优化项目跟进中',
+                            createdAt: '2026-01-20T14:20:00Z'
+                        },
+                        {
+                            id: 3,
+                            name: '科技公司A',
+                            contactPerson: '张总监',
+                            phone: '0411-55556666',
+                            email: 'zhang@example.com',
+                            source: '行业活动',
+                            status: 'new',
+                            notes: '数字化转型咨询需求',
+                            createdAt: '2026-02-01T09:15:00Z'
+                        }
+                    ];
+                    localStorage.setItem(this.storageKey, JSON.stringify(sampleCustomers));
+                }
+            }
+            
+            getCustomers() {
+                const data = localStorage.getItem(this.storageKey);
+                return data ? JSON.parse(data) : [];
+            }
+            
+            saveCustomers(customers) {
+                localStorage.setItem(this.storageKey, JSON.stringify(customers));
+            }
+            
+            addCustomer(customer) {
+                const customers = this.getCustomers();
+                customer.id = Date.now();
+                customer.createdAt = new Date().toISOString();
+                customers.push(customer);
+                this.saveCustomers(customers);
+                return customer;
+            }
+            
+            updateCustomer(id, updates) {
+                const customers = this.getCustomers();
+                const index = customers.findIndex(c => c.id === id);
+                if (index !== -1) {
+                    customers[index] = {...customers[index], ...updates};
+                    this.saveCustomers(customers);
+                    return true;
+                }
+                return false;
+            }
+            
+            deleteCustomer(id) {
+                const customers = this.getCustomers();
+                const filtered = customers.filter(c => c.id !== id);
+                this.saveCustomers(filtered);
+                return filtered.length !== customers.length;
+            }
+        }
+        
+        const customerManager = new CustomerManager();
+        
+        // 渲染客户表格
+        function renderCustomerTable() {
+            const customers = customerManager.getCustomers();
+            const tbody = document.getElementById('customerTableBody');
+            const loadingText = document.getElementById('loadingText');
+            
+            // 更新统计数据
+            updateStats(customers);
+            
+            if (customers.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 40px; color: #666;">
+                            📊 暂无客户数据，点击"新增客户"按钮添加第一个客户
+                        </td>
+                    </tr>
+                `;
+                loadingText.style.display = 'none';
+                return;
+            }
+            
+            // 按创建时间排序
+            customers.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            
+            tbody.innerHTML = customers.map(customer => {
+                const date = new Date(customer.createdAt);
+                const formattedDate = `${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+                
+                let statusClass = '';
+                let statusText = '';
+                switch(customer.status) {
+                    case 'new': 
+                        statusClass = 'tag-new'; 
+                        statusText = '新客户'; 
+                        break;
+                    case 'contacted': 
+                        statusClass = 'tag-contacted'; 
+                        statusText = '已联系'; 
+                        break;
+                    case 'followup': 
+                        statusClass = 'tag-followup'; 
+                        statusText = '跟进中'; 
+                        break;
+                    case 'deal': 
+                        statusClass = 'tag-deal'; 
+                        statusText = '已成交'; 
+                        break;
+                    case 'lost': 
+                        statusClass = 'tag-lost'; 
+                        statusText = '已流失'; 
+                        break;
+                }
+                
+                return `
+                    <tr>
+                        <td style="font-weight: 500;">${customer.name || '未命名'}</td>
+                        <td>${customer.contactPerson || '--'}</td>
+                        <td>${customer.phone || '--'}</td>
+                        <td>${customer.email || '--'}</td>
+                        <td>${customer.source || '--'}</td>
+                        <td><span class="tag ${statusClass}">${statusText}</span></td>
+                        <td>${formattedDate}</td>
+                        <td>
+                            <button class="btn" onclick="viewCustomer(${customer.id})" style="margin-right: 5px;">查看</button>
+                            <button class="btn btn-warning" onclick="editCustomer(${customer.id})" style="margin-right: 5px;">编辑</button>
+                            <button class="btn btn-danger" onclick="deleteCustomer(${customer.id})">删除</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+            
+            loadingText.style.display = 'none';
+        }
+        
+        // 更新统计
+        function updateStats(customers) {
+            const total = customers.length;
+            const newCount = customers.filter(c => c.status === 'new').length;
+            const contactedCount = customers.filter(c => c.status === 'contacted').length;
+            const closedCount = customers.filter(c => c.status === 'deal').length;
+            
+            document.getElementById('totalCustomers').textContent = total;
+            document.getElementById('newCustomers').textContent = newCount;
+            document.getElementById('contactedCustomers').textContent = contactedCount;
+            document.getElementById('closedCustomers').textContent = closedCount;
+        }
+        
+        // 显示添加表单
+        function showAddForm() {
+            const name = prompt('请输入客户名称：');
+            if (!name) return;
+            
+            const customer = {
+                name: name,
+                contactPerson: prompt('请输入联系人：') || '',
+                phone: prompt('请输入联系电话：') || '',
+                email: prompt('请输入邮箱地址：') || '',
+                source: prompt('客户来源（网站/推荐/活动等）：') || '其他',
+                status: 'new',
+                notes: prompt('备注信息（可选）：') || ''
+            };
+            
+            customerManager.addCustomer(customer);
+            renderCustomerTable();
+            alert('客户添加成功！');
+        }
+        
+        // 查看客户
+        function viewCustomer(id) {
+            const customers = customerManager.getCustomers();
+            const customer = customers.find(c => c.id === id);
+            if (customer) {
+                const date = new Date(customer.createdAt);
+                const formattedDate = `${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+                
+                alert(`📋 客户详情
+
+🏢 客户名称：${customer.name}
+👤 联系人：${customer.contactPerson || '--'}
+📞 电话：${customer.phone || '--'}
+📧 邮箱：${customer.email || '--'}
+📍 来源：${customer.source || '--'}
+🏷️ 状态：${customer.status}
+📅 创建时间：${formattedDate}
+📝 备注：${customer.notes || '无'}`);
+            }
+        }
+        
+        // 编辑客户
+        function editCustomer(id) {
+            const customers = customerManager.getCustomers();
+            const customer = customers.find(c => c.id === id);
+            if (customer) {
+                const updates = {
+                    name: prompt('修改客户名称：', customer.name) || customer.name,
+                    contactPerson: prompt('修改联系人：', customer.contactPerson) || customer.contactPerson,
+                    phone: prompt('修改电话：', customer.phone) || customer.phone,
+                    email: prompt('修改邮箱：', customer.email) || customer.email,
+                    source: prompt('修改来源：', customer.source) || customer.source,
+                    status: prompt('修改状态（new/contacted/followup/deal/lost）：', customer.status) || customer.status,
+                    notes: prompt('修改备注：', customer.notes) || customer.notes
+                };
+                
+                customerManager.updateCustomer(id, updates);
+                renderCustomerTable();
+                alert('客户信息更新成功！');
+            }
+        }
+        
+        // 删除客户
+        function deleteCustomer(id) {
+            if (confirm('确定要删除这个客户吗？此操作不可恢复。')) {
+                customerManager.deleteCustomer(id);
+                renderCustomerTable();
+                alert('客户删除成功！');
+            }
+        }
+        
+        // 导出数据
+        function exportData() {
+            const customers = customerManager.getCustomers();
+            const data = {
+                customers: customers,
+                exportedAt: new Date().toISOString(),
+                total: customers.length
+            };
+            
+            const jsonStr = JSON.stringify(data, null, 2);
+            const blob = new Blob([jsonStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `junshi-crm-backup-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert(`数据导出成功！共导出 ${customers.length} 个客户数据。`);
+        }
+        
+        // 导入数据
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = function(event) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        if (data.customers && Array.isArray(data.customers)) {
+                            localStorage.setItem('junshi_crm_customers', JSON.stringify(data.customers));
+                            renderCustomerTable();
+                            alert(`数据导入成功！共导入 ${data.customers.length} 个客户数据。`);
+                        } else {
+                            alert('数据格式错误，请选择正确的备份文件。');
+                        }
+                    } catch (error) {
+                        alert('文件读取失败，请检查文件格式。');
+                    }
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+        
+        // 清空数据
+        function clearAllData() {
+            if (confirm('确定要清空所有客户数据吗？此操作不可恢复！')) {
+                localStorage.removeItem('junshi_crm_customers');
+                customerManager.initializeSampleData(); // 重新初始化示例数据
+                renderCustomerTable();
+                alert('数据已清空，已恢复示例数据。');
+            }
+        }
+        
+        // 搜索功能
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#customerTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+        
+        // 页面加载
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCustomerTable();
+            
+            // 添加键盘快捷键
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'n') {
+                    e.preventDefault();
+                    showAddForm();
+                }
+                if (e.key === 'Escape') {
+                    document.getElementById('searchInput').value = '';
+                    renderCustomerTable();
+                }
+            });
+            
+            // 搜索框聚焦
+            document.getElementById('searchInput').addEventListener('focus', function() {
+                this.select();
+            });
+        });
+    </script>
+</body>
+</html>
