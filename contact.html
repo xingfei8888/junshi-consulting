@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - 大连君实管理咨询有限公司</title>
+    <meta name="description" content="联系大连君实管理咨询有限公司，获取专业的企业管理咨询与培训服务。">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header { background: linear-gradient(135deg, #1a237e 0%, #283593 100%); color: white; padding: 20px 0; }
+        .logo { font-size: 28px; font-weight: bold; margin-bottom: 10px; }
+        .logo span { color: #4fc3f7; }
+        .slogan { font-size: 16px; opacity: 0.9; margin-bottom: 20px; }
+        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
+        nav a { color: white; text-decoration: none; font-size: 16px; padding: 5px 0; position: relative; }
+        nav a:hover::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: #4fc3f7; }
+        
+        .section-title { text-align: center; font-size: 32px; margin: 50px 0 30px; color: #1a237e; position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: #4fc3f7; margin: 10px auto; }
+        
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 40px 0; }
+        .contact-card { background: white; border-radius: 10px; padding: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .contact-icon { font-size: 40px; color: #4fc3f7; margin-bottom: 20px; }
+        
+        .form-container { background: white; border-radius: 10px; padding: 40px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin: 40px 0; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 16px; }
+        .form-group textarea { height: 150px; resize: vertical; }
+        .form-submit { background: #4fc3f7; color: white; border: none; padding: 12px 30px; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background 0.3s; }
+        .form-submit:hover { background: #03a9f4; }
+        
+        .map-container { height: 400px; background: #e3f2fd; border-radius: 10px; margin: 40px 0; display: flex; align-items: center; justify-content: center; }
+        .map-placeholder { text-align: center; color: #666; }
+        .map-icon { font-size: 60px; margin-bottom: 20px; }
+        
+        .faq { margin: 40px 0; }
+        .faq-item { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .faq-question { font-weight: bold; color: #1a237e; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { display: none; padding-top: 10px; }
+        
+        .back-home { display: inline-block; margin: 30px 0; padding: 10px 20px; background: #4fc3f7; color: white; text-decoration: none; border-radius: 5px; }
+        .back-home:hover { background: #03a9f4; }
+        
+        footer { background: #0d1b2a; color: #aaa; text-align: center; padding: 40px 20px; font-size: 14px; margin-top: 50px; }
+        footer p { margin: 10px 0; }
+        
+        @media (max-width: 768px) {
+            nav { gap: 15px; }
+            .section-title { font-size: 28px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .form-container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">大连<span>君实</span>管理咨询</div>
+            <div class="slogan">专注企业管理咨询与赋能，助力企业卓越发展</div>
+            <nav>
+                <a href="index.html">首页</a>
+                <a href="about.html">关于我们</a>
+                <a href="services.html">核心服务</a>
+                <a href="highlights.html">业务亮点</a>
+                <a href="contact.html" style="color: #4fc3f7;">联系我们</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="section-title">联系我们</h1>
+        
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">📞</div>
+                <h3>咨询热线</h3>
+                <p><strong>电话：</strong>17504288163</p>
+                <p><strong>工作时间：</strong>周一至周五 9:00-18:00</p>
+                <p><strong>紧急咨询：</strong>7×24小时服务热线</p>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-icon">📧</div>
+                <h3>电子邮箱</h3>
+                <p><strong>商务合作：</strong>7313765@qq.com</p>
+                <p><strong>培训咨询：</strong>training@junshiconsulting.com</p>
+                <p><strong>技术支持：</strong>support@junshiconsulting.com</p>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-icon">🏢</div>
+                <h3>办公地址</h3>
+                <p><strong>公司总部：</strong>大连开发区润海园西区4-1-32-3</p>
+                <p><strong>邮政编码：</strong>116600</p>
+                <p><strong>来访预约：</strong>请提前1个工作日预约</p>
+            </div>
+        </div>
+        
+        <div class="form-container">
+            <h2 class="section-title" style="margin-top: 0;">在线咨询</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">姓名 *</label>
+                    <input type="text" id="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">公司名称 *</label>
+                    <input type="text" id="company" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">联系电话 *</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">电子邮箱 *</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="service">咨询类型</label>
+                    <select id="service">
+                        <option value="">请选择咨询类型</option>
+                        <option value="organization">组织架构设计</option>
+                        <option value="process">业务流程再造</option>
+                        <option value="talent">人才发展体系建设</option>
+                        <option value="training">管理赋能培训</option>
+                        <option value="sales">销售赋能培训</option>
+                        <option value="digital">AI与数字化转型</option>
+                        <option value="other">其他需求</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">咨询需求描述 *</label>
+                    <textarea id="message" placeholder="请详细描述您的咨询需求..." required></textarea>
+                </div>
+                
+                <button type="submit" class="form-submit">提交咨询请求</button>
+            </form>
+        </div>
+        
+        <h2 class="section-title">办公位置</h2>
+        <div class="map-container">
+            <div class="map-placeholder">
+                <div class="map-icon">🗺️</div>
+                <h3>大连开发区润海园西区</h3>
+                <p>地址：大连开发区润海园西区4-1-32-3</p>
+                <p>交通：近地铁3号线开发区站，多条公交线路可达</p>
+                <p style="margin-top: 20px; font-size: 14px; color: #999;">（如需详细地图导航，请联系我们获取具体位置）</p>
+            </div>
+        </div>
+        
+        <h2 class="section-title">常见问题</h2>
+        <div class="faq">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>咨询项目的合作流程是怎样的？</span>
+                    <span>▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>标准合作流程：1）需求沟通与诊断 → 2）方案设计与报价 → 3）合同签订 → 4）项目实施 → 5）成果验收 → 6）后续支持。整个过程通常需要4-12周，具体时间根据项目复杂度确定。</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>培训课程可以定制吗？</span>
+                    <span>▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>是的，我们提供完全定制化的培训课程服务。可以根据企业的行业特点、业务需求、学员背景等因素，量身设计培训内容和形式，确保培训效果最大化。</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>项目报价的依据是什么？</span>
+                    <span>▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>项目报价主要依据：1）项目复杂度与工作量 2）顾问团队资历 3）实施周期 4）企业规模 5）交付成果要求。我们会在需求诊断后提供详细报价方案。</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>紧急咨询需求如何处理？</span>
+                    <span>▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>对于紧急咨询需求，请直接拨打我们的24小时服务热线，我们将在2小时内响应并安排资深顾问对接，确保及时解决您的紧急问题。</p>
+                </div>
+            </div>
+        </div>
+        
+        <a href="index.html" class="back-home">← 返回首页</a>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2014-2026 大连君实管理咨询有限公司 版权所有</p>
+            <p>专业创造价值，诚信铸就未来</p>
+        </div>
+    </footer>
+
+    <script>
+        // 表单提交处理
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感谢您的咨询请求！我们会尽快与您联系，通常在工作时间内2小时内回复。');
+            this.reset();
+        });
+        
+        // FAQ切换显示
+        function toggleFAQ(element) {
+            const answer = element.parentElement.querySelector('.faq-answer');
+            const icon = element.querySelector('span:last-child');
+            
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                icon.textContent = '▼';
+            } else {
+                answer.style.display = 'block';
+                icon.textContent = '▲';
+            }
+        }
+        
+        // 默认展开第一个FAQ
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstFAQ = document.querySelector('.faq-question');
+            if (firstFAQ) {
+                toggleFAQ(firstFAQ);
+            }
+        });
+    </script>
+</body>
+</html>
