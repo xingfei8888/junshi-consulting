@@ -18,11 +18,36 @@
         nav a { color: white; text-decoration: none; font-size: 16px; padding: 5px 0; position: relative; }
         nav a:hover::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: #4fc3f7; }
         
+        .service-nav { background: #e3f2fd; padding: 15px 0; margin: 20px 0; border-radius: 10px; }
+        .service-nav .container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .service-nav a { color: #1a237e; text-decoration: none; padding: 6px 12px; border-radius: 20px; background: white; font-size: 13px; transition: all 0.3s; }
+        .service-nav a:hover { background: #4fc3f7; color: white; }
+        .service-nav a.active { background: #4fc3f7; color: white; }
+        
         .section-title { text-align: center; font-size: 32px; margin: 50px 0 30px; color: #1a237e; position: relative; }
         .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: #4fc3f7; margin: 10px auto; }
         
         .service-detail { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin: 30px 0; }
         .service-detail h2 { color: #1a237e; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e3f2fd; }
+        
+        .service-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .feature-item { background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 3px solid #4fc3f7; }
+        
+        .service-action { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid #eee; }
+        .action-btn { background: #4fc3f7; color: white; border: none; padding: 10px 25px; border-radius: 5px; text-decoration: none; display: inline-block; cursor: pointer; transition: background 0.3s; }
+        .action-btn:hover { background: #03a9f4; }
+        .action-btn.secondary { background: #28a745; }
+        .action-btn.secondary:hover { background: #218838; }
+        .action-btn.tertiary { background: #6f42c1; }
+        .action-btn.tertiary:hover { background: #5a2daf; }
+        
+        .tools-section { background: #e8f5e9; border-radius: 10px; padding: 30px; margin: 40px 0; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        .tool-card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
+        .tool-card h4 { color: #28a745; margin-bottom: 10px; }
+        
+        .service-info { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+        .info-tag { background: #e3f2fd; color: #1a237e; padding: 4px 10px; border-radius: 12px; font-size: 12px; }
         
         .process { max-width: 800px; margin: 40px auto; }
         .process-step { display: flex; align-items: center; margin-bottom: 30px; }
@@ -45,6 +70,7 @@
             .service-detail { padding: 20px; }
             .process-step { flex-direction: column; align-items: flex-start; }
             .step-number { margin-bottom: 10px; }
+            .service-action { flex-direction: column; gap: 15px; align-items: flex-start; }
         }
     </style>
 </head>
@@ -62,87 +88,217 @@
             </nav>
         </div>
     </header>
+    
+    <div class="service-nav">
+        <div class="container">
+            <a href="#organization" class="active">组织架构设计</a>
+            <a href="#process">业务流程优化</a>
+            <a href="#talent">人才管理体系</a>
+            <a href="#leadership">领导力发展</a>
+            <a href="#sales">销售技巧培训</a>
+            <a href="#ai">AI战略规划</a>
+        </div>
+    </div>
 
     <div class="container">
         <h1 class="section-title">核心服务领域</h1>
         
-        <div class="service-detail">
-            <h2>🏢 组织架构设计</h2>
+        <div class="service-detail" id="organization">
+            <div class="service-info">
+                <h2>🏢 组织架构设计</h2>
+                <div>
+                    <span class="info-tag">已创建二级页面</span>
+                    <span class="info-tag">5个实用工具</span>
+                </div>
+            </div>
             <p>为企业设计科学合理的组织架构，明确权责关系，提升组织运行效率，支持战略目标实现。</p>
-            <h3>服务内容：</h3>
-            <ul>
-                <li>组织诊断与评估</li>
-                <li>组织架构优化设计</li>
-                <li>岗位职责体系构建</li>
-                <li>权责利匹配机制设计</li>
-                <li>组织效能评估与改进</li>
-            </ul>
+            
+            <div class="service-features">
+                <div class="feature-item"><strong>组织诊断与评估</strong>：全面评估组织健康状况</div>
+                <div class="feature-item"><strong>架构优化设计</strong>：设计最适合的组织结构形式</div>
+                <div class="feature-item"><strong>权责体系构建</strong>：明确职责权限，建立清晰报告关系</div>
+                <div class="feature-item"><strong>协同机制建立</strong>：建立跨部门协作流程和机制</div>
+            </div>
+            
+            <div class="tools-section">
+                <h3>🛠️ 实用工具模板</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h4>组织健康度评估问卷</h4>
+                        <p>包含50个评估指标，帮助企业全面评估组织健康状况</p>
+                        <a href="javascript:void(0);" class="action-btn secondary" onclick="downloadTool('organization-health-assessment')">下载模板</a>
+                    </div>
+                    <div class="tool-card">
+                        <h4>岗位说明书模板</h4>
+                        <p>标准化岗位说明书模板，包含职责、权限、任职要求等</p>
+                        <a href="javascript:void(0);" class="action-btn secondary" onclick="downloadTool('job-description-template')">下载模板</a>
+                    </div>
+                    <div class="tool-card">
+                        <h4>组织结构设计检查清单</h4>
+                        <p>包含组织设计的关键要素和注意事项检查清单</p>
+                        <a href="javascript:void(0);" class="action-btn secondary" onclick="downloadTool('org-design-checklist')">下载模板</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-action">
+                <div>
+                    <a href="organization-structure.html" class="action-btn">查看详细服务方案</a>
+                    <span style="margin-left: 15px; color: #666; font-size: 14px;">包含完整方法论+案例+报价</span>
+                </div>
+                <a href="contact.html" class="action-btn tertiary">立即咨询</a>
+            </div>
         </div>
         
-        <div class="service-detail">
-            <h2>🔄 业务流程再造</h2>
+        <div class="service-detail" id="process">
+            <div class="service-info">
+                <h2>🔄 业务流程优化</h2>
+                <div>
+                    <span class="info-tag">已创建二级页面</span>
+                    <span class="info-tag">4个实用工具</span>
+                </div>
+            </div>
             <p>通过流程优化与再造，消除冗余环节，提升运营效率，降低成本，增强企业核心竞争力。</p>
-            <h3>服务内容：</h3>
-            <ul>
-                <li>业务流程诊断与分析</li>
-                <li>核心流程优化设计</li>
-                <li>跨部门流程协同优化</li>
-                <li>流程数字化改造</li>
-                <li>流程绩效监控体系</li>
-            </ul>
+            
+            <div class="service-features">
+                <div class="feature-item"><strong>业务流程诊断与分析</strong>：识别流程瓶颈和效率提升点</div>
+                <div class="feature-item"><strong>核心流程优化设计</strong>：重新设计高效、简洁的业务流程</div>
+                <div class="feature-item"><strong>跨部门流程协同优化</strong>：消除部门墙，提升协作效率</div>
+                <div class="feature-item"><strong>流程数字化改造</strong>：引入自动化技术提升效率</div>
+            </div>
+            
+            <div class="tools-section">
+                <h3>🛠️ 实用工具模板</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h4>流程诊断问卷</h4>
+                        <p>包含50个流程评估指标，全面评估流程健康状况</p>
+                        <a href="javascript:void(0);" class="action-btn secondary" onclick="downloadTool('process-diagnosis-questionnaire')">下载模板</a>
+                    </div>
+                    <div class="tool-card">
+                        <h4>流程映射模板</h4>
+                        <p>标准化的流程图模板，支持BPMN 2.0规范</p>
+                        <a href="javascript:void(0);" class="action-btn secondary" onclick="downloadTool('process-mapping-template')">下载模板</a>
+                    </div>
+                    <div class="tool-card">
+                        <h4>流程KPI仪表板</h4>
+                        <p>包含15个核心流程绩效指标和监控方法</p>
+                        <a href="javascript:void(0);" class="action-btn secondary" onclick="downloadTool('process-kpi-dashboard')">下载模板</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-action">
+                <div>
+                    <a href="process-optimization.html" class="action-btn">查看详细服务方案</a>
+                    <span style="margin-left: 15px; color: #666; font-size: 14px;">包含德勤方法论+案例+数据</span>
+                </div>
+                <a href="contact.html" class="action-btn tertiary">立即咨询</a>
+            </div>
         </div>
         
-        <div class="service-detail">
-            <h2>🎯 人才发展体系建设</h2>
+        <div class="service-detail" id="talent">
+            <div class="service-info">
+                <h2>🎯 人才发展体系建设</h2>
+                <div>
+                    <span class="info-tag">即将创建</span>
+                    <span class="info-tag">6个实用工具</span>
+                </div>
+            </div>
             <p>构建系统化的人才培养体系，包括领导力发展、专业能力提升、内训师培养等项目。</p>
-            <h3>服务内容：</h3>
-            <ul>
-                <li>人才盘点与评估</li>
-                <li>胜任力模型构建</li>
-                <li>领导力发展项目</li>
-                <li>专业能力提升课程</li>
-                <li>内训师培养体系</li>
-                <li>人才梯队建设</li>
-            </ul>
+            
+            <div class="service-features">
+                <div class="feature-item"><strong>人才盘点与评估</strong>：系统评估现有人才状况</div>
+                <div class="feature-item"><strong>胜任力模型构建</strong>：建立岗位能力标准体系</div>
+                <div class="feature-item"><strong>领导力发展项目</strong>：定制化领导力培养计划</div>
+                <div class="feature-item"><strong>内训师培养体系</strong>：培养企业内部培训师队伍</div>
+            </div>
+            
+            <div class="service-action">
+                <div>
+                    <a href="#" class="action-btn" style="background: #6c757d;" onclick="alert('人才管理体系页面正在创建中，预计5分钟后完成。')">页面即将上线</a>
+                    <span style="margin-left: 15px; color: #666; font-size: 14px;">5分钟后查看详细方案</span>
+                </div>
+                <a href="contact.html" class="action-btn tertiary">提前咨询</a>
+            </div>
         </div>
         
-        <div class="service-detail">
-            <h2>🤝 管理赋能培训</h2>
+        <div class="service-detail" id="leadership">
+            <div class="service-info">
+                <h2>🤝 管理赋能培训</h2>
+                <div>
+                    <span class="info-tag">即将创建</span>
+                    <span class="info-tag">5个培训模块</span>
+                </div>
+            </div>
             <p>提供中层管理、团队建设、战略执行等培训课程，提升管理者综合素质与领导能力。</p>
-            <h3>培训课程：</h3>
-            <ul>
-                <li>中层管理者能力提升</li>
-                <li>团队建设与高效协作</li>
-                <li>战略解码与执行</li>
-                <li>绩效管理与激励</li>
-                <li>变革管理与创新</li>
-            </ul>
+            
+            <div class="service-features">
+                <div class="feature-item"><strong>中层管理者能力提升</strong>：提升管理技能和领导能力</div>
+                <div class="feature-item"><strong>团队建设与高效协作</strong>：打造高效协作团队</div>
+                <div class="feature-item"><strong>战略解码与执行</strong>：将战略转化为具体行动</div>
+                <div class="feature-item"><strong>绩效管理与激励</strong>：建立有效绩效管理体系</div>
+            </div>
+            
+            <div class="service-action">
+                <div>
+                    <a href="#" class="action-btn" style="background: #6c757d;" onclick="alert('领导力发展页面正在创建中。')">页面即将上线</a>
+                    <span style="margin-left: 15px; color: #666; font-size: 14px;">敬请期待</span>
+                </div>
+                <a href="contact.html" class="action-btn tertiary">了解详情</a>
+            </div>
         </div>
         
-        <div class="service-detail">
-            <h2>💰 销售赋能培训</h2>
+        <div class="service-detail" id="sales">
+            <div class="service-info">
+                <h2>💰 销售赋能培训</h2>
+                <div>
+                    <span class="info-tag">即将创建</span>
+                    <span class="info-tag">4个销售体系</span>
+                </div>
+            </div>
             <p>定制化销售技巧、客户关系管理、商机挖掘等培训，提升销售团队业绩达成能力。</p>
-            <h3>培训课程：</h3>
-            <ul>
-                <li>销售技巧与策略</li>
-                <li>大客户关系管理</li>
-                <li>商机挖掘与转化</li>
-                <li>谈判技巧与策略</li>
-                <li>销售团队管理</li>
-            </ul>
+            
+            <div class="service-features">
+                <div class="feature-item"><strong>销售技巧与策略</strong>：提升销售成交能力和谈判技巧</div>
+                <div class="feature-item"><strong>大客户关系管理</strong>：建立长期稳定的客户关系</div>
+                <div class="feature-item"><strong>商机挖掘与转化</strong>：提升线索转化率和客户价值</div>
+                <div class="feature-item"><strong>销售团队管理</strong>：打造高效销售团队和管理体系</div>
+            </div>
+            
+            <div class="service-action">
+                <div>
+                    <a href="#" class="action-btn" style="background: #6c757d;" onclick="alert('销售技巧培训页面正在创建中。')">页面即将上线</a>
+                    <span style="margin-left: 15px; color: #666; font-size: 14px;">敬请期待</span>
+                </div>
+                <a href="contact.html" class="action-btn tertiary">了解详情</a>
+            </div>
         </div>
         
-        <div class="service-detail">
-            <h2>🤖 AI与数字化转型</h2>
+        <div class="service-detail" id="ai">
+            <div class="service-info">
+                <h2>🤖 AI与数字化转型</h2>
+                <div>
+                    <span class="info-tag">即将创建</span>
+                    <span class="info-tag">3个转型方案</span>
+                </div>
+            </div>
             <p>提供人工智能应用、数字化转型方案设计，帮助企业把握科技发展趋势，实现智能化升级。</p>
-            <h3>服务内容：</h3>
-            <ul>
-                <li>数字化转型战略规划</li>
-                <li>AI技术应用场景设计</li>
-                <li>业务流程数字化改造</li>
-                <li>数据驱动决策体系</li>
-                <li>智能化运营方案</li>
-            </ul>
+            
+            <div class="service-features">
+                <div class="feature-item"><strong>数字化转型战略规划</strong>：制定企业数字化转型路线图</div>
+                <div class="feature-item"><strong>AI技术应用场景设计</strong>：识别AI技术应用机会点</div>
+                <div class="feature-item"><strong>业务流程数字化改造</strong>：传统流程向数字化流程转型</div>
+                <div class="feature-item"><strong>数据驱动决策体系</strong>：建立基于数据的决策机制</div>
+            </div>
+            
+            <div class="service-action">
+                <div>
+                    <a href="#" class="action-btn" style="background: #6c757d;" onclick="alert('AI战略规划页面正在创建中。')">页面即将上线</a>
+                    <span style="margin-left: 15px; color: #666; font-size: 14px;">敬请期待</span>
+                </div>
+                <a href="contact.html" class="action-btn tertiary">了解详情</a>
+            </div>
         </div>
         
         <h2 class="section-title">标准服务流程</h2>
@@ -190,6 +346,15 @@
             <p>具体报价请<a href="contact.html">联系我们</a>获取定制化方案。</p>
         </div>
         
+        <div style="text-align: center; margin: 50px 0; padding: 30px; background: #e3f2fd; border-radius: 10px;">
+            <h3 style="color: #1a237e; margin-bottom: 15px;">已创建的二级服务页面</h3>
+            <p style="margin-bottom: 20px;">点击查看详细的服务方法论、案例分析和实用工具</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="organization-structure.html" class="action-btn">🏢 组织架构设计</a>
+                <a href="process-optimization.html" class="action-btn">🔄 业务流程优化</a>
+            </div>
+        </div>
+        
         <a href="index.html" class="back-home">← 返回首页</a>
     </div>
 
@@ -199,5 +364,95 @@
             <p>专业创造价值，诚信铸就未来</p>
         </div>
     </footer>
+    
+    <script>
+        // 工具下载功能
+        function downloadTool(toolId) {
+            const toolData = {
+                'organization-health-assessment': {
+                    name: '组织健康度评估问卷.docx',
+                    content: '这是组织健康度评估问卷模板，包含50个评估指标...'
+                },
+                'job-description-template': {
+                    name: '岗位说明书模板.docx',
+                    content: '这是标准化岗位说明书模板...'
+                },
+                'org-design-checklist': {
+                    name: '组织结构设计检查清单.xlsx',
+                    content: '这是组织结构设计关键要素检查清单...'
+                },
+                'process-diagnosis-questionnaire': {
+                    name: '流程诊断问卷.docx',
+                    content: '这是业务流程诊断问卷模板...'
+                },
+                'process-mapping-template': {
+                    name: '流程映射模板.vsd',
+                    content: '这是BPMN 2.0标准的流程映射模板...'
+                },
+                'process-kpi-dashboard': {
+                    name: '流程KPI仪表板.xlsx',
+                    content: '这是流程绩效监控仪表板模板...'
+                }
+            };
+            
+            if (toolData[toolId]) {
+                const tool = toolData[toolId];
+                // 模拟下载过程
+                alert(`正在下载：${tool.name}\n\n在实际项目中，我们将提供完整的定制化工具文件。\n\n如需真实文件，请通过咨询联系我们。`);
+                
+                // 记录下载行为
+                console.log(`用户下载了工具：${toolId} - ${tool.name}`);
+                
+                // 在实际项目中，这里应该生成真实文件并提供下载
+                // const blob = new Blob([tool.content], { type: 'application/octet-stream' });
+                // const url = window.URL.createObjectURL(blob);
+                // const a = document.createElement('a');
+                // a.href = url;
+                // a.download = tool.name;
+                // a.click();
+            } else {
+                alert('工具正在准备中，请联系我们获取完整工具包。');
+            }
+        }
+        
+        // 服务导航平滑滚动
+        document.querySelectorAll('.service-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').replace('#', '');
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 页面滚动时更新导航高亮
+        window.addEventListener('scroll', function() {
+            const sections = ['organization', 'process', 'talent', 'leadership', 'sales', 'ai'];
+            let currentSection = '';
+            
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 150 && rect.bottom >= 150) {
+                        currentSection = sectionId;
+                    }
+                }
+            });
+            
+            // 更新导航高亮
+            document.querySelectorAll('.service-nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
