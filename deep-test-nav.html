@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>导航链接深度测试</title>
+    <script src="fix-smooth-scroll.js"></script>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .test-area { margin: 20px 0; padding: 15px; border: 2px solid #ddd; }
+        .nav-sim { background: #f5f5f5; padding: 15px; }
+        .nav-sim ul { list-style: none; padding: 0; }
+        .nav-sim li { display: inline-block; margin: 0 10px; }
+        .nav-sim a { padding: 8px 15px; background: #4fc3f7; color: white; text-decoration: none; border-radius: 4px; }
+        .result { margin: 10px 0; padding: 10px; background: #f9f9f9; }
+        .success { color: green; }
+        .error { color: red; }
+        #consultation { margin-top: 1000px; padding: 50px; background: #e3f2fd; }
+    </style>
+</head>
+<body>
+    <h1>导航链接深度测试</h1>
+    
+    <div class="test-area">
+        <h2>模拟右上角导航栏</h2>
+        <div class="nav-sim">
+            <ul>
+                <li><a href="#home">首页</a></li>
+                <li><a href="services.html">服务项目</a></li>
+                <li><a href="#consultation">在线咨询</a></li>
+                <li><a href="about.html">关于我们</a></li>
+                <li><a href="crm-login.html">CRM系统</a></li>
+            </ul>
+        </div>
+        
+        <div class="result" id="testResult">点击上面的链接开始测试...</div>
+    </div>
+    
+    <div class="test-area">
+        <h2>脚本调试信息</h2>
+        <div id="debugInfo"></div>
+    </div>
+    
+    <div id="consultation">
+        <h2>在线咨询区域（锚点目标）</h2>
+        <p>这是#consultation锚点的目标区域。</p>
+    </div>
+    
+    <script>
+        // 调试信息收集
+        const debugInfo = document.getElementById('debugInfo');
+        const testResult = document.getElementById('testResult');
+        
+        function logDebug(msg) {
+            debugInfo.innerHTML += `<div>${msg}</div>`;
+            console.log(msg);
+        }
+        
+        // 测试所有链接
+        const testLinks = document.querySelectorAll('.nav-sim a');
+        
+        testLinks.forEach(link => {
+            const originalHref = link.getAttribute('href');
+            
+            // 添加点击监听
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const href = this.getAttribute('href');
+                const linkText = this.textContent;
+                
+                logDebug(`点击: ${linkText} (href: ${href})`);
+                
+                // 测试链接类型
+                if (href.startsWith('#')) {
+                    logDebug(`  → 锚点链接，应使用平滑滚动`);
+                    
+                    const target = document.querySelector(href);
+                    if (target) {
+                        logDebug(`  → 找到锚点目标: ${href}`);
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        testResult.innerHTML = `<div class="success">✅ ${linkText}: 平滑滚动到 ${href}</div>`;
+                    } else {
+                        logDebug(`  → 未找到锚点目标: ${href}`);
+                        testResult.innerHTML = `<div class="error">❌ ${linkText}: 未找到锚点 ${href}</div>`;
+                    }
+                } else if (href.includes('.html')) {
+                    logDebug(`  → 页面链接，应正常跳转（测试环境中阻止了跳转）`);
+                    
+                    // 检查文件是否存在
+                    fetch(href, { method: 'HEAD' })
+                        .then(response => {
+                            if (response.ok) {
+                                testResult.innerHTML = `<div class="success">✅ ${linkText}: 页面 ${href} 存在（实际网站中应跳转）</div>`;
+                                logDebug(`  → 页面 ${href} 存在，状态: ${response.status}`);
+                            } else {
+                                testResult.innerHTML = `<div class="error">❌ ${linkText}: 页面 ${href} 不存在 (${response.status})</div>`;
+                                logDebug(`  → 页面 ${href} 不存在，状态: ${response.status}`);
+                            }
+                        })
+                        .catch(error => {
+                            testResult.innerHTML = `<div class="error">❌ ${linkText}: 检查页面失败 - ${error.message}</div>`;
+                            logDebug(`  → 检查页面失败: ${error.message}`);
+                        });
+                }
+            });
+        });
+        
+        // 加载后运行
+        document.addEventListener('DOMContentLoaded', function() {
+            logDebug('页面加载完成');
+            logDebug('fix-smooth-scroll.js 应已加载');
+            
+            // 检查实际网站的链接
+            setTimeout(() => {
+                logDebug('\n=== 诊断实际网站问题 ===');
+                logDebug('问题可能性：');
+                logDebug('1. 脚本加载顺序问题');
+                logDebug('2. 事件监听器冲突');
+                logDebug('3. 缓存问题');
+                logDebug('4. 其他脚本干扰');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
