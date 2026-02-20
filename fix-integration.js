@@ -34,6 +34,7 @@
             
             // 验证数据
             if (!formData.name || !formData.company || !formData.phone || !formData.message) {
+            // 添加手机号格式验证            const phonePattern = /^1[3-9]\d{9}$/;            if (!phonePattern.test(formData.phone)) {                alert("请输入有效的11位手机号（以1开头，第二位为3-9）！");                return;            }
                 alert('请填写完整的联系信息！');
                 return;
             }
